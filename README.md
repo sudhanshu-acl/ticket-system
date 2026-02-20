@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Next Js learning
 
-## Getting Started
+- A full stack reactjs library
 
-First, run the development server:
+1. System requirements
+- Nodejs > 20.0
+- `pnpm create next-app@latest my-app --yes` 
+- You can check for manual setup on docs.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+2. Check `package.json` file.
+
+2. Next.js uses file-system routing, which means the routes in your application are determined by how you structure your files.
+
+3. Both `layout.tsx` and `page.tsx` will be rendered when the user visits the root of your application (/).
+
+4. Create a `src` folder inside keep your code so that config will be outside for better management.
+
+5. `public` folder will be for handling  static assets.
+
+6. Running dev server
+`npm run dev`
+
+7. Set up Absolute Imports and Module Path Aliases
+`tsconfig.json`
+
+`
+// Before
+import { Button } from '../../../components/button'
+ 
+// After
+import { Button } from '@/components/button'
+
+`
+
+```
+# tsconfig.json
+
+{
+  "compilerOptions": {
+    "baseUrl": "src/"
+  }
+}
+
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project structure and organization
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Top-level files
+   = next.config.js
+   = src, app, pages, public,
+   = proxy.ts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Nested routes
+Folders define URL segments. Nesting folders nests segments. Layouts at any level wrap their child segments. A route becomes public when a page or route file exists.
 
-## Learn More
+Path	URL pattern	Notes
 
-To learn more about Next.js, take a look at the following resources:
+app/layout.tsx	     —	    Root layout wraps all routes
+app/blog/layout.tsx	 —	    Wraps /blog and descendants
+app/page.tsx	     /	    Public route
+app/blog/page.tsx	 /blog	Public route
+app/blog/authors/page.tsx	/blog/authors	Public route
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Parallel and Intercepted Routes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Organizing your project
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Next.js is unopinionate about how you oragnize and colocate your project files.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Components hierarchy
+
+- `layout.js`
+- `template.js`
+- `error.js` (React error boundary)
+- `loading.js`(React suspense boundary)
+- `not-found.js`(React boundary for "not found " UI)
+- `page.js` or nested    `layout.js`
+![alt text](image.png)
+
+## Colocation
+
+- In the app director, nested folder  define route structure. Each folder represents a route segment that is mapped to a corresponding segment in a URL path.
+
+- However , even though route structure is defined through folder 
+
+
+## Layout and pages
+- Next.js uses files system routing, meaning you can use folders and files to define routes
+- A layout is UI that is shared between multiple pages. On navigation, layouts preserve state, remain interactive, and do not rerender.
+
+
+
+

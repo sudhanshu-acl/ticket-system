@@ -1,0 +1,29 @@
+import { sampleTickets } from "@/app/data/tickets";
+
+// 1️⃣ Static generation at build time
+export async function generateStaticParams() {
+  return sampleTickets.map((ticket) => ({
+    ticketId: ticket.ticketId,
+  }));
+}
+
+export default function TicketDetailPage({
+  params,
+}: {
+  params: { ticketId: string };
+}) {
+  const ticket = sampleTickets.find(
+    (t: any) => t.ticketId === params.ticketId
+  );
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h1>Ticket Details</h1>
+      <p><strong>ID:</strong> {ticket?.ticketId}</p>
+      <p><strong>Title:</strong> {ticket?.title}</p>
+      <p><strong>Category:</strong> {ticket?.category}</p>
+      <p><strong>Priority:</strong> {ticket?.priority}</p>
+      <p><strong>Status:</strong> {ticket?.status}</p>
+    </div>
+  );
+}

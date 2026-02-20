@@ -47,8 +47,12 @@ const Header = () => {
                 </div>
 
                 <div className="flex max-lg:ml-auto space-x-4">
-                    <button
-                        className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-slate-900 border border-gray-400 bg-transparent hover:bg-gray-50 transition-all">Login</button>
+                    <Link
+                        href="/login"
+                        className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-slate-900 border border-gray-400 bg-transparent hover:bg-gray-50 transition-all"
+                    >
+                        Login
+                    </Link>
                     <button
                         className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-white border border-blue-600 bg-blue-600 hover:bg-blue-700 transition-all">Sign
                         up</button>

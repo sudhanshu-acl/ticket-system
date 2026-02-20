@@ -90,6 +90,22 @@ app/blog/authors/page.tsx	/blog/authors	Public route
 - Next.js uses files system routing, meaning you can use folders and files to define routes
 - A layout is UI that is shared between multiple pages. On navigation, layouts preserve state, remain interactive, and do not rerender.
 
+-> generating static props
+-> route grouping
+-> 
 
+## Nesting layouts
+
+## Creating a dynamic segment
+
+- Dynamic segments allow you to create routes that are generated from data. 
+- For example, instead of manually creating a route for each individual blog post, you can create a dynamic segment to generate the routes based on blog post data. 
+`app/blog/[slug]/page.tsx`
+
+## `function generateStaticParams() {}`
+- generateStaticParams() runs at build time
+- Build time screenshot
+- 
+![alt text](image-1.png)
 
 

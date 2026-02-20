@@ -18,6 +18,7 @@ export default function Home() {
             </p>
             
             <div className="flex gap-4 justify-center md:justify-start">
+              {/* Prefetched when the link is hovered or enters the viewport */}
               <Link 
                 href="/dashboard"
                 className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
@@ -31,12 +32,12 @@ export default function Home() {
           </div>
           
           {/* Right Side - Image */}
-          <div className="flex-1">
+          <div className="flex">
             <Image 
               src="/support-ticket.png" 
               alt="Support Ticket" 
-              width={500} 
-              height={300}
+              width={300} 
+              height={200}
               className="rounded-lg shadow-lg"
             />
           </div>

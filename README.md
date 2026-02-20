@@ -109,3 +109,32 @@ app/blog/authors/page.tsx	/blog/authors	Public route
 ![alt text](image-1.png)
 
 
+## Linking and navigation
+- In next js linking and navigation are hanled by defaults.
+- This often means the client has to wait for a server response before a new route can be shown
+
+- Dynamic Rendering vs static rendering
+
+
+
+## Prefetching
+
+- Prefetching is the process of loading a route in the background before the user navigates to it.
+
+## Steaming
+
+- Streaming allows the server to send parts of a dynamic route to the client as soon as they're ready, rather than waiting for the entire route to be rendered. This means users see something sooner, even if parts of the page are still loading.
+
+- `Static routes` will only be fetched when the user clicks the link.
+
+- `Dynamic routes` will need to be rendered on the server first before the client can navigate to it.
+
+- `loading.tsx` -> wrap <Suspense> boundary.
+
+## Server and Client Components
+- By default all the component in next js are server components
+- `use client` directive for client side renering
+- When to use what
+
+ -`client component`   when you have onClick, State, events handling, useEffect etc.
+ - `server components` when we have to use the server

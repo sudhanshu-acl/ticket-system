@@ -3,14 +3,6 @@
 import React, { useEffect, useState } from 'react'
 import { sampleTickets } from '../data/tickets'
 
-import type { Metadata } from 'next'
- 
-// Add the metadata export for SEO and page info
-export const metadata: Metadata = {
-  title: 'Dashboard',
-  description: 'Dashboard overview of tickets and system stats.',
-}
-
 
 const DashboardPage = () => {
   const [tickets, setTickets] = useState(sampleTickets.slice(0, 5))

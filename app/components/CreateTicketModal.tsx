@@ -14,8 +14,6 @@ export interface TicketFormData {
   description: string
   category: string
   priority: Priority
-  impact: string
-  urgency: string
 }
 
 const CreateTicketModal: React.FC<CreateTicketModalProps> = ({ isOpen, onClose, onSubmit }) => {
@@ -24,8 +22,6 @@ const CreateTicketModal: React.FC<CreateTicketModalProps> = ({ isOpen, onClose, 
     description: '',
     category: 'Infrastructure',
     priority: 'Medium',
-    impact: 'Medium',
-    urgency: 'Medium',
   })
 
   const [loading, setLoading] = useState(false)
@@ -42,8 +38,6 @@ const CreateTicketModal: React.FC<CreateTicketModalProps> = ({ isOpen, onClose, 
 
   const priorities: Priority[] = ['Low', 'Medium', 'High', 'Critical']
 
-  const impacts = ['Low', 'Medium', 'High']
-  const urgencies = ['Low', 'Medium', 'High']
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -64,9 +58,7 @@ const CreateTicketModal: React.FC<CreateTicketModalProps> = ({ isOpen, onClose, 
         title: '',
         description: '',
         category: 'Infrastructure',
-        priority: 'Medium',
-        impact: 'Medium',
-        urgency: 'Medium',
+        priority: 'Medium'
       })
       setLoading(false)
       onClose()
@@ -156,43 +148,6 @@ const CreateTicketModal: React.FC<CreateTicketModalProps> = ({ isOpen, onClose, 
                 </option>
               ))}
             </select>
-          </div>
-
-          {/* Impact and Urgency (side by side) */}
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-slate-900 mb-1">Impact *</label>
-              <select
-                name="impact"
-                value={formData.impact}
-                onChange={handleChange}
-                disabled={loading}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
-              >
-                {impacts.map((i) => (
-                  <option key={i} value={i}>
-                    {i}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-slate-900 mb-1">Urgency *</label>
-              <select
-                name="urgency"
-                value={formData.urgency}
-                onChange={handleChange}
-                disabled={loading}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
-              >
-                {urgencies.map((u) => (
-                  <option key={u} value={u}>
-                    {u}
-                  </option>
-                ))}
-              </select>
-            </div>
           </div>
         </form>
 

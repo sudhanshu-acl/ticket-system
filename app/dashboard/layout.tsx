@@ -3,17 +3,16 @@
 
 import React, { useState, useEffect } from 'react'
 import Sidebar from '@/app/components/Sidebar'
-import CreateTicketModal from '@/app/components/CreateTicketModal'
 import { User } from '@/app/utils/type'
-import { TicketFormData } from '@/app/components/CreateTicketModal'
 
 export default function DashboardLayout({
   children,
+  createTicketModal,
 }: {
   children: React.ReactNode
+  createTicketModal: React.ReactNode
 }) {
   const [user, setUser] = useState<User | null>(null)
-  const [isCreateTicketOpen, setIsCreateTicketOpen] = useState(false)
   const [loading, setLoading] = useState(true)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
 
@@ -28,12 +27,6 @@ export default function DashboardLayout({
     }
     setLoading(false)
   }, [])
-
-  const handleCreateTicket = (ticketData: TicketFormData) => {
-    console.log('New ticket created:', ticketData)
-    // Here you would typically send the data to your API
-    alert(`Ticket created: ${ticketData.title}`)
-  }
 
   if (loading) {
     return (
@@ -51,7 +44,7 @@ export default function DashboardLayout({
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
-      <Sidebar user={user} onCreateTicket={() => setIsCreateTicketOpen(true)} onCollapsedChange={setSidebarCollapsed} />
+      <Sidebar user={user} onCollapsedChange={setSidebarCollapsed} />
 
       {/* Main Content */}
       <div className="flex-1 transition-all duration-300" style={{ marginLeft: mainMargin }}>
@@ -76,12 +69,8 @@ export default function DashboardLayout({
         </main>
       </div>
 
-      {/* Create Ticket Modal */}
-      <CreateTicketModal
-        isOpen={isCreateTicketOpen}
-        onClose={() => setIsCreateTicketOpen(false)}
-        onSubmit={handleCreateTicket}
-      />
+      {/* Parallel Route: Create Ticket Modal */}
+      {createTicketModal}
     </div>
   )
 }

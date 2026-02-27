@@ -2,16 +2,17 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { User, UserRole } from '@/app/utils/type'
 
 interface SidebarProps {
   user: User | null
-  onCreateTicket: () => void
   onCollapsedChange?: (collapsed: boolean) => void
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ user, onCreateTicket, onCollapsedChange }) => {
+const Sidebar: React.FC<SidebarProps> = ({ user, onCollapsedChange }) => {
   const [collapsed, setCollapsed] = useState(false)
+  const router = useRouter()
 
   const handleToggleCollapse = () => {
     const newState = !collapsed
@@ -74,7 +75,7 @@ const Sidebar: React.FC<SidebarProps> = ({ user, onCreateTicket, onCollapsedChan
       {/* Create Ticket Button */}
       <div className="p-4 border-b border-slate-700">
         <button
-          onClick={onCreateTicket}
+          onClick={() => router.push('/dashboard/create-ticket')}
           className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-3 rounded text-sm transition-colors"
           title="Create new ticket"
         >

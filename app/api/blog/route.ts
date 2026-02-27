@@ -29,7 +29,6 @@ export async function POST(request: Request) {
             },
         })
             .then((response) => response.json())
-            .then((json) => console.log(json));
 
         return Response.json({
             statusCode: 200,

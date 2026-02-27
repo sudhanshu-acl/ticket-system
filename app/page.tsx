@@ -5,10 +5,10 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-zinc-50 font-sans">
       {/* Hero Section */}
-      <section className="py-20 px-4 md:px-10 bg-gradient-to-b from-white to-zinc-100">
+      <section className="py-20 md:px-10 bg-gradient-to-b from-white to-zinc-100">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10">
           {/* Left Side - Message and Buttons */}
-          <div className="flex-1 text-center md:text-left">
+          <div className="flex-1 text-center md:text-left justify-center">
             <h1 className="text-4xl md:text-5xl font-bold text-black mb-6 tracking-tight">
               Welcome to Support Ticket System
             </h1>
@@ -17,16 +17,19 @@ export default function Home() {
               Create, track, and resolve tickets efficiently.
             </p>
             
-            <div className="flex gap-4 justify-center md:justify-start">
+            <div className="flex gap-4 md:justify-start">
               <Link 
                 href="/dashboard"
                 className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
               >
                 Go to Dashboard
               </Link>
-              <button className="px-6 py-3 border border-gray-300 bg-white text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors">
-                Create Ticket
-              </button>
+                
+              <Link href={"/dashboard/create-ticket"}>
+                <button className="px-6 py-3 border border-gray-300 bg-white text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors" >
+                  Create Ticket
+                </button>
+              </Link>
             </div>
           </div>
           
@@ -35,8 +38,8 @@ export default function Home() {
             <Image 
               src="/support-ticket.png" 
               alt="Support Ticket" 
-              width={500} 
-              height={300}
+              width={300} 
+              height={250}
               className="rounded-lg shadow-lg"
             />
           </div>

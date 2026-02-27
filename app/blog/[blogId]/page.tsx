@@ -6,7 +6,7 @@ interface Params {
 }
 
 async function fetchPost(id: string): Promise<any | undefined> {
-  const res = await fetch(`/api/blog/${id}`);
+  const res = await fetch(`http://localhost:3000/api/blog/${id}`);
   const json = await res.json();
   // json.data will be the single post object
   return json.data as any;
@@ -21,9 +21,12 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogDetail({ params }: Params) {
-  const post = await fetchPost(params.id);
+  const { id } = await params;
 
-  console.log("Post ", params);
+  console.log("Post ", id);
+
+    const post = await fetchPost(id);
+
 
   if (!post) {
     notFound();

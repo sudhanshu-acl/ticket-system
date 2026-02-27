@@ -1,9 +1,9 @@
 import { NextRequest } from 'next/server';
 
-// simple proxy to jsonplaceholder for a single post
+//  single post
 export async function GET(request: NextRequest, { params }: { params: { blogId: string } }) {
   const { blogId } = await params;
-  console.log('Blogs params ', params);
+  console.log('Blogs params ', blogId);
   try {
     const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${blogId}`);
     const data = await res.json();

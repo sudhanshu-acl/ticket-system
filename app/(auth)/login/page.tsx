@@ -1,14 +1,5 @@
-/*
-** Login page for user
-**
-*/
+import Login from '../../components/Login'
 
-const login = () => {
-  return (
-    <div>
-      <h1>Login page</h1>
-    </div>
-  )
+export default function LoginPage() {
+  return <Login />
 }
-
-export default login

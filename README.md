@@ -109,3 +109,8 @@ app/blog/authors/page.tsx	/blog/authors	Public route
 ![alt text](image-1.png)
 
 
+## SSG VS DYANMIC RENDERING VS STATIC  BUILD DIFFERENCE
+- Note the symbol used.
+
+![alt text](image-2.png)
+

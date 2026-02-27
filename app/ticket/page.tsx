@@ -99,10 +99,7 @@ export default function TicketPage() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900">Tickets</h1>
-            <p className="text-gray-600 mt-1">Manage and track support tickets</p>
-          </div>
+        
           
           {/* View Toggle */}
           <div className="flex bg-white rounded-lg shadow-sm p-1 border border-gray-200">

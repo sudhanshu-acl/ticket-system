@@ -1,13 +1,17 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { CommentOnBlog } from '@/app/_components/comment';
+import CommentLoading from '@/app/_components/comment-loading';
+import React from 'react';
 
 interface Params {
-  params: { id: string };
+  params: { blogId: string };
 }
 
-async function fetchPost(id: string): Promise<any | undefined> {
-  const res = await fetch(`http://localhost:3000/api/blog/${id}`);
+async function fetchPost(blogId: string): Promise<any | undefined> {
+  const res = await fetch(`http://localhost:3000/api/blog/${blogId}`);
   const json = await res.json();
+
   // json.data will be the single post object
   return json.data as any;
 }
@@ -21,12 +25,8 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogDetail({ params }: Params) {
-  const { id } = await params;
-
-  console.log("Post ", id);
-
-    const post = await fetchPost(id);
-
+  const { blogId } = await params;
+  const post = await fetchPost(blogId);
 
   if (!post) {
     notFound();
@@ -42,6 +42,12 @@ export default async function BlogDetail({ params }: Params) {
       >
         ← Back to blog list
       </Link>
+
+      <h3 className="text-xl font-semibold mt-6 mb-4">Comments</h3>
+      <React.Suspense fallback={<CommentLoading />}>
+        {/* CommentOnBlog is async; Suspense fallback shows skeleton while loading */}
+        <CommentOnBlog postId={blogId as string} />
+      </React.Suspense>
     </div>
   );
 }

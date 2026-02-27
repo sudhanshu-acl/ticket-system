@@ -1,9 +1,8 @@
 import { NextRequest } from 'next/server';
 
 //  single post
-export async function GET(request: NextRequest, { params }: { params: { blogId: string } }) {
-  const { blogId } = await params;
-  console.log('Blogs params ', blogId);
+export async function GET(request: NextRequest, context: { params: Promise<{ blogId: string }> }) {
+  const { blogId } = await context.params;
   try {
     const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${blogId}`);
     const data = await res.json();

@@ -114,3 +114,62 @@ app/blog/authors/page.tsx	/blog/authors	Public route
 
 ![alt text](image-2.png)
 
+
+## Parallel route
+![alt text](image-3.png)
+
+Parallel route allow to render one or more page within the same layout
+They are useful for highly dynamic sections of an app, such as dashboards and feeds on social sites.
+
+
+- Slots are passed as props to the shared parent layout. For the example above, the component in app/layout.js now accepts the @analytics and @team slots props, and can render them in parallel alongside the children prop:
+```
+export default function Layout({
+  children,
+  team,
+  analytics,
+}: {
+  children: React.ReactNode
+  analytics: React.ReactNode
+  team: React.ReactNode
+}) {
+  return (
+    <>
+      {children}
+      {team}
+      {analytics}
+    </>
+  )
+}
+
+```
+
+## Conditional Routes
+- You can use parallel Routes to conditional render routes
+- Eg: For role based etc
+
+![alt text](image-4.png)
+
+```
+import { checkUserRole } from '@/lib/auth'
+ 
+export default function Layout({
+  user,
+  admin,
+}: {
+  user: React.ReactNode
+  admin: React.ReactNode
+}) {
+  const role = checkUserRole()
+  return role === 'admin' ? admin : user
+}
+
+```
+
+## ENV
+- `NEXT_PUBLIC_` are only accessed by client components.
+- `API_BASE`     are accessed by Server components.
+
+
+
+

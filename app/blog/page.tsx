@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { BlogPost } from '../utils/type';
 
 async function fetchPosts(): Promise<BlogPost[]> {
-  const res = await fetch('http://localhost:3000/api/blog');
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog`);
   const json = await res.json();
   return json.data as BlogPost[];
 }

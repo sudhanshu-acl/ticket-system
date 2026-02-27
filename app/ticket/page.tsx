@@ -3,6 +3,13 @@
 import { useState } from 'react';
 import { sampleTickets } from '../data/tickets';
 import { IncidentTicket } from '../data/dummy';
+import type { Metadata } from 'next'
+ 
+// Add the metadata export for SEO and page info
+export const metadata: Metadata = {
+  title: 'Tickets',
+  description: 'View and manage all incident and support tickets in the system.',
+}
 
 const getPriorityColor = (priority: string) => {
   switch (priority) {

@@ -1,10 +1,18 @@
 import Link from 'next/link';
 import { BlogPost } from '../utils/type';
+import type { Metadata } from 'next'
+ 
 
 async function fetchPosts(): Promise<BlogPost[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog`);
   const json = await res.json();
   return json.data as BlogPost[];
+}
+
+// Add the metadata export for SEO and page info
+export const metadata: Metadata = {
+  title: 'My Blog',
+  description: 'My personal blog',
 }
 
 export default async function BlogPage() {

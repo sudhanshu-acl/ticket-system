@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { sampleTickets } from '../data/tickets'
 
+
 const DashboardPage = () => {
   const [tickets, setTickets] = useState(sampleTickets.slice(0, 5))
   const [stats, setStats] = useState({

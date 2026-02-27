@@ -1,3 +1,11 @@
+import type { Metadata } from 'next'
+ 
+// Add the metadata export for SEO and page info
+export const metadata: Metadata = {
+  title: 'About TicketHub',
+  description: 'Learn more about TicketHub, a lightweight incident and support ticket management system.',
+}
+
 const page = () => {
   return (
     <>

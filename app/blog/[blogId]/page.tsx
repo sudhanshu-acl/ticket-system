@@ -9,7 +9,7 @@ interface Params {
 }
 
 async function fetchPost(blogId: string): Promise<any | undefined> {
-  const res = await fetch(`http://localhost:3000/api/blog/${blogId}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog/${blogId}`);
   const json = await res.json();
 
   // json.data will be the single post object
@@ -18,7 +18,7 @@ async function fetchPost(blogId: string): Promise<any | undefined> {
 
 export async function generateStaticParams() {
   // fetch a list of posts and return their ids for static generation
-  const res = await fetch('http://localhost:3000/api/blog');
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog`);
   const json = await res.json();
   const data: any[] = json.data;
   return data.slice(0, 10).map((post) => ({ blogId: post.id.toString() }));

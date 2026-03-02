@@ -18,16 +18,12 @@ export const connectDB = async (): Promise<void> => {
       readPreference: 'secondaryPreferred'
     });
 
-
-    console.log(" conn ", conn)
-
     console.log('✅ Mongoose connected to DB');
-
-    console.error('❌ Mongoose connection disconnected');
 
 
     // Handle process termination
     process.on('SIGINT', async () => {
+      console.error('❌ Mongoose connection disconnected');
       await mongoose.connection.close();
       process.exit(0);
     });

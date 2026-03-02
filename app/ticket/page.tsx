@@ -81,9 +81,9 @@ const TicketTable = ({ tickets }: { tickets: IncidentTicket[] }) => (
               </span>
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{ticket.reportedBy.name}</td>
-            {/* <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-              {new Date(ticket.createdAt).toLocaleDateString()}
-            </td> */}
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              {new Date(ticket.createdAt).toLocaleString()}
+            </td>
           </tr>
         ))}
       </tbody>

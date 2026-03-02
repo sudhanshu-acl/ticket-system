@@ -9,7 +9,6 @@ export async function POST(request: Request) {
  
   try {
     const { name, email, password, role = 'user', jobTitle } = await request.json();
-     console.log("Signup request received", email, role, password);
 
     if (!name || !email || !password) {
       return NextResponse.json({ error: 'Name, email and password are required' }, { status: 400 });
@@ -21,7 +20,7 @@ export async function POST(request: Request) {
     if (existing) {
       return NextResponse.json({ error: 'User already exists' }, { status: 409 });
     }
-    console.log('type of password', typeof password, password);
+   
     const hashed = await bcrypt.hash(password.toString(), 10);
 
     const newUser = await User.create({ name, email, password: hashed, role, jobTitle });

@@ -10,9 +10,15 @@ export const metadata: Metadata = {
 
 
 async function fetchPosts(): Promise<BlogPost[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog`);
-  const json = await res.json();
-  return json.data as BlogPost[];
+  try {
+    const res = await fetch('http://localhost:3000/api/blog', { cache: 'no-store' });
+    if (!res.ok) return [];
+    const json = await res.json();
+    return json.data as BlogPost[];
+  } catch (error) {
+    console.error('Failed to fetch posts:', error);
+    return [];
+  }
 }
 
 export default async function BlogPage() {

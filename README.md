@@ -170,6 +170,13 @@ export default function Layout({
 - `NEXT_PUBLIC_` are only accessed by client components.
 - `API_BASE`     are accessed by Server components.
 
+## How to manage backend API
+
+- Create api inside the api folder
+- ENV values
+- Private folder so that it can not be accessible outside the folder
+
+
 
 
 

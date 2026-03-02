@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-const Login = () => {
+const SignUp = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
@@ -31,7 +31,7 @@ const Login = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ email: formData.email, password: formData.password })
       })
 
       const data = await res.json()
@@ -64,7 +64,7 @@ const Login = () => {
             {error && <div className="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">{error}</div>}
             <form className="mt-12 space-y-6" onSubmit={handleSubmit}>
               <div>
-                <label className="text-slate-900 text-sm font-medium mb-2 block">User name</label>
+                <label className="text-slate-900 text-sm font-medium mb-2 block">Email</label>
                 <div className="relative flex items-center">
                   <input
                     name="email"
@@ -74,7 +74,7 @@ const Login = () => {
                     onChange={handleChange}
                     disabled={loading}
                     className="w-full text-slate-900 text-sm border border-slate-300 px-4 py-3 pr-8 rounded-md outline-blue-600 disabled:bg-gray-100"
-                    placeholder="Enter email"
+                    placeholder="you@example.com"
                   />
                   <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" className="w-4 h-4 absolute right-4" viewBox="0 0 24 24">
                     <circle cx="10" cy="7" r="6" data-original="#000000"></circle>
@@ -132,4 +132,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default SignUp

@@ -66,8 +66,9 @@ const Sidebar: React.FC<SidebarProps> = ({ user, onCollapsedChange }) => {
       {/* User Info */}
       {!collapsed && user && (
         <div className="p-4 border-b border-slate-700">
-          <p className="font-semibold text-sm">{user.username}</p>
+          <p className="font-semibold text-sm">{user.name || user.email}</p>
           <p className="text-xs text-slate-400 capitalize">{user.role || 'user'}</p>
+          {user.jobTitle && <p className="text-xs text-slate-400">{user.jobTitle}</p>}
           <p className="text-xs text-slate-400">{user.email}</p>
         </div>
       )}

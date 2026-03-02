@@ -53,10 +53,11 @@ const Header = () => {
                     >
                         Login
                     </Link>
-                    <button
-                        className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-white border border-blue-600 bg-blue-600 hover:bg-blue-700 transition-all">Sign
-                        up</button>
-
+                     <Link
+                        href="/signup"
+                        className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-slate-900 border border-gray-400 bg-transparent hover:bg-gray-50 transition-all"
+                    >  Sign Up </Link>
+                   
                     <button id="toggleOpen" className="lg:hidden cursor-pointer">
                         <svg className="w-7 h-7" fill="#000" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fillRule="evenodd"

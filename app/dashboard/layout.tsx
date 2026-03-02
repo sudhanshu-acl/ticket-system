@@ -55,7 +55,7 @@ export default function DashboardLayout({
             {user && (
               <div className="flex items-center gap-4">
                 <div className="text-right">
-                  <p className="text-sm font-medium text-slate-900">{user.username}</p>
+                  <p className="text-sm font-medium text-slate-900">{user.name || user.email}</p>
                   <p className="text-xs text-slate-500 capitalize">{user.role || 'user'}</p>
                 </div>
               </div>

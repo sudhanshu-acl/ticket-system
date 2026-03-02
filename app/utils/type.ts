@@ -12,14 +12,22 @@ export interface BlogPost {
 }
 
 export interface User {
-    id: number;
-    username: string;
-    email?: string;
+    id: string | number;
+    name?: string;
+    email: string;
     role?: UserRole;
+    jobTitle?: string;
+}
+
+export interface RegisterRequest {
+    name: string;
+    email: string;
+    password: string;
+    jobTitle?: string;
 }
 
 export interface LoginRequest {
-    username: string;
+    email: string;
     password: string;
 }
 

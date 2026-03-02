@@ -9,19 +9,28 @@ interface Params {
 }
 
 async function fetchPost(blogId: string): Promise<any | undefined> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog/${blogId}`);
-  const json = await res.json();
-
-  // json.data will be the single post object
-  return json.data as any;
+  try {
+    const res = await fetch(`http://localhost:3000/api/blog/${blogId}`, { cache: 'no-store' });
+    if (!res.ok) return undefined;
+    const json = await res.json();
+    return json.data as any;
+  } catch (error) {
+    console.error('Failed to fetch post:', error);
+    return undefined;
+  }
 }
 
 export async function generateStaticParams() {
-  // fetch a list of posts and return their ids for static generation
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/blog`);
-  const json = await res.json();
-  const data: any[] = json.data;
-  return data.slice(0, 10).map((post) => ({ blogId: post.id.toString() }));
+  try {
+    const res = await fetch('http://localhost:3000/api/blog', { cache: 'no-store' });
+    if (!res.ok) return [];
+    const json = await res.json();
+    const data: any[] = json.data || [];
+    return data.slice(0, 10).map((post) => ({ blogId: post.id.toString() }));
+  } catch (error) {
+    console.error('Failed to generate static params:', error);
+    return [];
+  }
 }
 
 export default async function BlogDetail({ params }: Params) {

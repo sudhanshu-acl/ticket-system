@@ -1,51 +1,42 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { LoginRequest, LoginResponse, User } from '@/app/utils/type';
+// app/api/login/route.ts
+import { NextResponse } from 'next/server';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import { connectDB } from '@/app/lib/mongodb';
+import User from '@/app/models/user';
 
-// Mock user database - replace with actual database
-const mockUsers = [
-  { id: 1, username: 'admin', password: 'admin123', email: 'admin@example.com', role: 'admin' as const },
-  { id: 2, username: 'user', password: 'user123', email: 'user@example.com', role: 'user' as const },
-  { id: 3, username: 'support', password: 'support123', email: 'support@example.com', role: 'support' as const },
-];
+export async function POST(request: Request) {
+  const { email, password } = await request.json();
 
-export async function POST(request: NextRequest): Promise<NextResponse<LoginResponse>> {
-  try {
-    const body: LoginRequest = await request.json();
+  await connectDB();
 
-    // Validate input
-    if (!body.username || !body.password) {
-      return NextResponse.json(
-        { success: false, message: 'Username and password are required' },
-        { status: 400 }
-      );
-    }
-
-    // Find user in mock database
-    const user = mockUsers.find(
-      (u) => u.username === body.username && u.password === body.password
-    );
-
-    if (!user) {
-      return NextResponse.json(
-        { success: false, message: 'Invalid username or password' },
-        { status: 401 }
-      );
-    }
-
-    // Return user without password
-    const { password, ...userWithoutPassword } = user;
-    const response: LoginResponse = {
-      success: true,
-      message: 'Login successful',
-      user: userWithoutPassword as User,
-    };
-
-    return NextResponse.json(response, { status: 200 });
-  } catch (error) {
-    console.error('Login error:', error);
-    return NextResponse.json(
-      { success: false, message: 'Internal server error' },
-      { status: 500 }
-    );
+  const user = await User.findOne({ email });
+  if (!user) {
+    return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
   }
+
+  const isMatch = await bcrypt.compare(password.toString(), user.password);
+  if (!isMatch) {
+    return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+  }
+
+  const token = jwt.sign(
+    { userId: user._id, email: user.email },
+    process.env.JWT_SECRET!,
+    { expiresIn: '7d' }
+  );
+
+  const response = NextResponse.json({ message: 'Login successful', data: {
+    token: token,
+    user: { id: user._id, email: user.email, role: user.role }
+  } });
+
+  response.cookies.set('token', token, {
+    httpOnly: true,
+    secure: true,
+    path: '/',
+    maxAge: 60 * 60 * 24 * 7,
+  });
+
+  return response;
 }

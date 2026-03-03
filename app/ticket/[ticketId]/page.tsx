@@ -1,4 +1,11 @@
 import { sampleTickets } from "@/app/data/tickets";
+import type { Metadata } from 'next'
+
+ // Add the metadata export for SEO and page info
+export const metadata: Metadata = {
+  title: 'Ticket Details',
+  description: 'Details of a specific ticket',
+}
 
 // 1️⃣ Static generation at build time
 export async function generateStaticParams() {

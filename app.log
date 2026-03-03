@@ -11,3 +11,4 @@
 [2026-03-03T07:32:38.838Z] [DEBUG] [LOGIN] Connected to database | {"email":"admin1@gmail.com"}
 [2026-03-03T07:32:38.965Z] [DEBUG] [LOGIN] JWT token generated | {"email":"admin1@gmail.com"}
 [2026-03-03T07:32:38.968Z] [INFO] [AUTH] LOGIN succeeded | {"email":"admin1@gmail.com"}
+[2026-03-03T09:42:57.383Z] [INFO] [LOGOUT] Logout attempt

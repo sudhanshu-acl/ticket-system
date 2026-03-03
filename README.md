@@ -176,6 +176,10 @@ export default function Layout({
 - ENV values
 - Private folder so that it can not be accessible outside the folder
 
+## How to optimize your Next.js application for production
+
+
+
 
 
 

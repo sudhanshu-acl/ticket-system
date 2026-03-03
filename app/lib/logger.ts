@@ -4,6 +4,8 @@
  */
 
 type LogLevel = 'info' | 'warn' | 'error' | 'debug';
+import fs from 'fs';
+import path from 'path';
 
 interface LogEntry {
   timestamp: string;
@@ -23,27 +25,43 @@ const formatLog = (level: LogLevel, message: string, data?: Record<string, any>,
   const pathStr = pathname ? ` | ${pathname}` : '';
   return `[${timestamp}] [${level.toUpperCase()}]${pathStr} ${message}${dataStr}`;
 };
+const writeToFile = (formatted: string) => {
+  if (typeof window === 'undefined') {
+    try {
+      if (fs && fs.appendFileSync && path) {
+        const logPath = path.join(process.cwd(), 'app.log');
+        fs.appendFileSync(logPath, formatted + '\n', 'utf8');
+      }
+    } catch (e) {
+      console.error('Failed to write log:', e);
+    }
+  }
+};
 
 export const logger = {
   info: (message: string, data?: Record<string, any>, pathname?: string) => {
     const formatted = formatLog('info', message, data, pathname);
     console.log(formatted);
+    writeToFile(formatted);
   },
 
   warn: (message: string, data?: Record<string, any>, pathname?: string) => {
     const formatted = formatLog('warn', message, data, pathname);
     console.warn(formatted);
+    writeToFile(formatted);
   },
 
   error: (message: string, data?: Record<string, any>, pathname?: string) => {
     const formatted = formatLog('error', message, data, pathname);
     console.error(formatted);
+    writeToFile(formatted);
   },
 
   debug: (message: string, data?: Record<string, any>, pathname?: string) => {
     if (process.env.DEBUG) {
       const formatted = formatLog('debug', message, data, pathname);
       console.debug(formatted);
+      writeToFile(formatted);
     }
   },
 

@@ -1,0 +1,13 @@
+[2026-03-03T07:23:24.848Z] [INFO] [REGISTER] Registration attempt | {"email":"admin1@gmail.com","name":"admin1"}
+[2026-03-03T07:23:25.029Z] [DEBUG] [REGISTER] Password hashed | {"email":"admin1@gmail.com"}
+[2026-03-03T07:23:25.078Z] [INFO] [REGISTER] User created in database | {"email":"admin1@gmail.com","userId":"69a68c6db6470fc969923d9e"}
+[2026-03-03T07:23:25.099Z] [DEBUG] [REGISTER] JWT token signed | {"email":"admin1@gmail.com"}
+[2026-03-03T07:23:25.101Z] [INFO] [AUTH] REGISTER succeeded | {"email":"admin1@gmail.com"}
+[2026-03-03T07:32:27.448Z] [INFO] [LOGIN] Login attempt | {"email":"sudhanshu1@gmail.com"}
+[2026-03-03T07:32:27.451Z] [DEBUG] [LOGIN] Connected to database | {"email":"sudhanshu1@gmail.com"}
+[2026-03-03T07:32:27.687Z] [DEBUG] [LOGIN] JWT token generated | {"email":"sudhanshu1@gmail.com"}
+[2026-03-03T07:32:27.691Z] [INFO] [AUTH] LOGIN succeeded | {"email":"sudhanshu1@gmail.com"}
+[2026-03-03T07:32:38.835Z] [INFO] [LOGIN] Login attempt | {"email":"admin1@gmail.com"}
+[2026-03-03T07:32:38.838Z] [DEBUG] [LOGIN] Connected to database | {"email":"admin1@gmail.com"}
+[2026-03-03T07:32:38.965Z] [DEBUG] [LOGIN] JWT token generated | {"email":"admin1@gmail.com"}
+[2026-03-03T07:32:38.968Z] [INFO] [AUTH] LOGIN succeeded | {"email":"admin1@gmail.com"}

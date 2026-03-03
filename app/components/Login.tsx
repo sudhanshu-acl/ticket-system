@@ -3,10 +3,13 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
+import { useAuth } from '../context/AuthContext'
+
 const Login = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
+  const { login } = useAuth()
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -41,9 +44,9 @@ const Login = () => {
         return
       }
 
-      // Store user info if needed
-      localStorage.setItem('user', JSON.stringify(data.user))
-      
+      // Store user info and token globally via context
+      login(data.data.user, data.data.token)
+
       // Redirect to dashboard
       router.push('/dashboard')
     } catch (err) {
@@ -58,7 +61,7 @@ const Login = () => {
     <div className="bg-gray-50">
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
         <div className="max-w-[480px] w-full">
-        
+
           <div className="p-6 sm:p-8 rounded-2xl bg-white border border-gray-200 shadow-sm">
             <h1 className="text-slate-900 text-center text-3xl font-semibold">Sign in</h1>
             {error && <div className="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">{error}</div>}

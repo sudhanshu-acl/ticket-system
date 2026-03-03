@@ -1,8 +1,12 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { navigationItems } from '../data/navigation';
+import { useAuth } from '../context/AuthContext';
 
 const Header = () => {
+    const { user, logout } = useAuth();
     return (
         <header className="flex shadow-md py-4 px-4 sm:px-10 bg-white min-h-[70px] tracking-wide relative z-50">
             <div className="flex flex-wrap items-center justify-between gap-5 w-full">
@@ -35,7 +39,7 @@ const Header = () => {
                         </li>
                         {navigationItems.map((item) => (
                             <li key={item.href} className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3">
-                                <Link 
+                                <Link
                                     href={item.href}
                                     className="hover:text-blue-700 text-slate-900 block font-medium text-[15px]"
                                 >
@@ -46,18 +50,34 @@ const Header = () => {
                     </ul>
                 </div>
 
-                <div className="flex max-lg:ml-auto space-x-4">
-                    <Link
-                        href="/login"
-                        className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-slate-900 border border-gray-400 bg-transparent hover:bg-gray-50 transition-all"
-                    >
-                        Login
-                    </Link>
-                     <Link
-                        href="/signup"
-                        className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-slate-900 border border-gray-400 bg-transparent hover:bg-gray-50 transition-all"
-                    >  Sign Up </Link>
-                   
+                <div className="flex items-center max-lg:ml-auto space-x-4">
+                    {user ? (
+                        <>
+                            <span className="text-sm font-medium text-slate-700 max-sm:hidden">
+                                Hi, {user.name.split(' ')[0]}
+                            </span>
+                            <button
+                                onClick={logout}
+                                className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-slate-900 border border-gray-400 bg-transparent hover:bg-gray-50 transition-all"
+                            >
+                                Logout
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <Link
+                                href="/login"
+                                className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-slate-900 border border-gray-400 bg-transparent hover:bg-gray-50 transition-all"
+                            >
+                                Login
+                            </Link>
+                            <Link
+                                href="/signup"
+                                className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-slate-900 border border-gray-400 bg-transparent hover:bg-gray-50 transition-all"
+                            >  Sign Up </Link>
+                        </>
+                    )}
+
                     <button id="toggleOpen" className="lg:hidden cursor-pointer">
                         <svg className="w-7 h-7" fill="#000" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fillRule="evenodd"

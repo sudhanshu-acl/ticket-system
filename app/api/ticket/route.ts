@@ -2,20 +2,24 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { connectDB } from '@/app/lib/mongodb';
 import Ticket from '@/app/models/ticket';
+import User from '@/app/models/user';
 import jwt from 'jsonwebtoken';
 
-const verifyAuth = (request: NextRequest) => {
+const verifyAuth = async (request: NextRequest) => {
   const token = request.cookies.get('token')?.value;
   if (!token) return null;
   try {
-    return jwt.verify(token, process.env.JWT_SECRET || 'change-me');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'change-me') as any;
+    await connectDB();
+    const user = await User.findById(decoded.userId);
+    return user;
   } catch (err) {
     return null;
   }
 };
 
 export async function POST(request: NextRequest) {
-  const user = verifyAuth(request);
+  const user = await verifyAuth(request);
   if (!user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
@@ -36,7 +40,7 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
-  const user = verifyAuth(request);
+  const user = await verifyAuth(request);
   if (!user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }

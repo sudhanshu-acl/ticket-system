@@ -61,3 +61,22 @@
 [2026-03-04T06:40:31.630Z] [DEBUG] [LOGIN] Connected to database | {"email":"user1@gmail.com"}
 [2026-03-04T06:40:31.921Z] [DEBUG] [LOGIN] JWT token generated | {"email":"user1@gmail.com"}
 [2026-03-04T06:40:31.924Z] [INFO] [AUTH] LOGIN succeeded | {"email":"user1@gmail.com"}
+[2026-03-04T07:33:23.603Z] [INFO] [LOGIN] Login attempt | {"email":"user2@gmail.com"}
+[2026-03-04T07:33:23.611Z] [DEBUG] [LOGIN] Connected to database | {"email":"user2@gmail.com"}
+[2026-03-04T07:33:23.633Z] [WARN] [LOGIN] User not found | {"email":"user2@gmail.com"}
+[2026-03-04T07:33:28.777Z] [INFO] [LOGIN] Login attempt | {"email":"user2@gmail.com"}
+[2026-03-04T07:33:28.782Z] [DEBUG] [LOGIN] Connected to database | {"email":"user2@gmail.com"}
+[2026-03-04T07:33:28.798Z] [WARN] [LOGIN] User not found | {"email":"user2@gmail.com"}
+[2026-03-04T07:33:31.919Z] [INFO] [LOGIN] Login attempt | {"email":"user3@gmail.com"}
+[2026-03-04T07:33:31.924Z] [DEBUG] [LOGIN] Connected to database | {"email":"user3@gmail.com"}
+[2026-03-04T07:33:33.631Z] [DEBUG] [LOGIN] JWT token generated | {"email":"user3@gmail.com"}
+[2026-03-04T07:33:33.637Z] [INFO] [AUTH] LOGIN succeeded | {"email":"user3@gmail.com"}
+[2026-03-04T07:36:20.587Z] [INFO] [LOGOUT] Logout attempt
+[2026-03-04T07:38:54.238Z] [INFO] [LOGIN] Login attempt | {"email":"admin1@gmail.com"}
+[2026-03-04T07:38:54.242Z] [DEBUG] [LOGIN] Connected to database | {"email":"admin1@gmail.com"}
+[2026-03-04T07:38:54.530Z] [DEBUG] [LOGIN] JWT token generated | {"email":"admin1@gmail.com"}
+[2026-03-04T07:38:54.534Z] [INFO] [AUTH] LOGIN succeeded | {"email":"admin1@gmail.com"}
+[2026-03-04T07:39:18.166Z] [INFO] [LOGIN] Login attempt | {"email":"user3@gmail.com"}
+[2026-03-04T07:39:18.171Z] [DEBUG] [LOGIN] Connected to database | {"email":"user3@gmail.com"}
+[2026-03-04T07:39:18.451Z] [DEBUG] [LOGIN] JWT token generated | {"email":"user3@gmail.com"}
+[2026-03-04T07:39:18.456Z] [INFO] [AUTH] LOGIN succeeded | {"email":"user3@gmail.com"}

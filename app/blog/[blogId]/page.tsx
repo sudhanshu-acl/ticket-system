@@ -43,14 +43,16 @@ export default async function BlogDetail({ params }: Params) {
 
   return (
     <div className="p-4 max-w-2xl mx-auto">
-      <h1 className="text-3xl font-bold mb-4">{post?.title}</h1>
-      <p className="text-gray-800 mb-6">{post?.body}</p>
       <Link
         href="/blog"
         className="inline-block text-blue-500 hover:underline"
       >
-        ← Back to blog list
+        ← Back to blogs
       </Link>
+
+      <h1 className="text-3xl font-bold mb-4">{post?.title}</h1>
+      <p className="text-gray-800 mb-6">{post?.body}</p>
+
 
       <h3 className="text-xl font-semibold mt-6 mb-4">Comments</h3>
       <React.Suspense fallback={<CommentLoading />}>

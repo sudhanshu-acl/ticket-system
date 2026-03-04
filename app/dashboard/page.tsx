@@ -4,9 +4,11 @@ import React, { useEffect, useState } from 'react'
 import { sampleTickets } from '../data/tickets'
 import { User } from '@/app/utils/type'
 import { IncidentTicket, Status } from '../data/dummy'
+import { getTickets } from '../actions/tickets/getTicket'
 
 const DashboardPage = () => {
-  const [tickets, setTickets] = useState<IncidentTicket[]>(sampleTickets)
+  const [tickets, setTickets] = useState<IncidentTicket[]>([])
+  const [loading, setLoading] = useState(true)
   const [user, setUser] = useState<User | null>(null)
   const [selectedTicket, setSelectedTicket] = useState<IncidentTicket | null>(null)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
@@ -21,11 +23,22 @@ const DashboardPage = () => {
   })
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user')
-    if (storedUser) {
-      setUser(JSON.parse(storedUser))
+    const fetchInitialData = async () => {
+      const storedUser = localStorage.getItem('user')
+      if (storedUser) {
+        setUser(JSON.parse(storedUser))
+      }
+
+      setLoading(true)
+      const fetchedTickets = await getTickets()
+      setTickets(fetchedTickets || [])
+      setLoading(false)
     }
 
+    fetchInitialData()
+  }, [])
+
+  useEffect(() => {
     const currentStats = {
       totalTickets: tickets.length,
       openTickets: tickets.filter((t) => t.status === 'Open').length,
@@ -44,23 +57,38 @@ const DashboardPage = () => {
     }
   }
 
-  const handleUpdateTicket = () => {
+  const handleUpdateTicket = async () => {
     if (!selectedTicket) return
 
-    const updatedTickets = tickets.map((t) => {
-      if (t._id === selectedTicket._id) {
-        return {
-          ...t,
-          status: newStatus,
-          // 'resolvedBy' is not strictly in IncidentTicket by default but we can simulate saving it
-        }
-      }
-      return t
-    })
+    try {
+      const res = await fetch(`/api/ticket/${selectedTicket._id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: newStatus, resolvedBy })
+      });
 
-    setTickets(updatedTickets)
-    setIsSidebarOpen(false)
-    setSelectedTicket(null)
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to update ticket');
+
+      const updatedTickets = tickets.map((t) => {
+        if (t._id === selectedTicket._id) {
+          return {
+            ...t,
+            status: newStatus,
+            // Add 'resolvedBy' if you add it to the Interface later
+          }
+        }
+        return t
+      })
+
+      setTickets(updatedTickets)
+      setIsSidebarOpen(false)
+      setSelectedTicket(null)
+      alert("Ticket updated successfully!"); // Or use the toast component if we had added it here
+    } catch (error: any) {
+      console.error(error);
+      alert(error.message);
+    }
   }
 
   const getPriorityColor = (priority: string) => {
@@ -91,6 +119,14 @@ const DashboardPage = () => {
       default:
         return 'bg-gray-100 text-gray-800'
     }
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    )
   }
 
   return (

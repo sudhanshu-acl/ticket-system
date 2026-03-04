@@ -61,7 +61,7 @@ const Header = () => {
                                 </span>
                                 <button
                                     onClick={logout}
-                                    className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-slate-900 border border-gray-400 bg-transparent hover:bg-gray-50 transition-all"
+                                    className="px-4 py-2 text-sm font-medium tracking-wide rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none cursor-pointer disabled:bg-gray-400 transition-all"
                                 >
                                     Logout
                                 </button>
@@ -70,13 +70,13 @@ const Header = () => {
                             <>
                                 <Link
                                     href="/login"
-                                    className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-slate-900 border border-gray-400 bg-transparent hover:bg-gray-50 transition-all"
+                                    className="px-4 py-2 text-sm rounded-full font-medium tracking-wide rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none cursor-pointer disabled:bg-gray-400 transition-all"
                                 >
                                     Login
                                 </Link>
                                 <Link
                                     href="/signup"
-                                    className="px-4 py-2 text-sm rounded-full font-medium cursor-pointer tracking-wide text-slate-900 border border-gray-400 bg-transparent hover:bg-gray-50 transition-all"
+                                    className="px-4 py-2 text-sm rounded-full font-medium tracking-wide rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none cursor-pointer disabled:bg-gray-400 transition-all"
                                 >  Sign Up </Link>
                             </>
                         )}

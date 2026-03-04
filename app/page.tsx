@@ -13,18 +13,18 @@ export default function Home() {
               Welcome to Support Ticket System
             </h1>
             <p className="text-lg text-zinc-600 mb-8 max-w-xl">
-              Streamline your customer support with our easy-to-use ticket management system. 
+              Streamline your customer support with our easy-to-use ticket management system.
               Create, track, and resolve tickets efficiently.
             </p>
-            
+
             <div className="flex gap-4 md:justify-start">
-              <Link 
+              <Link
                 href="/dashboard"
                 className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors"
               >
                 Go to Dashboard
               </Link>
-                
+
               <Link href={"/dashboard/create-ticket"}>
                 <button className="px-6 py-3 border border-gray-300 bg-white text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors" >
                   Create Ticket
@@ -32,13 +32,13 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          
+
           {/* Right Side - Image */}
-          <div className="flex-1">
-            <Image 
-              src="/support-ticket.png" 
-              alt="Support Ticket" 
-              width={300} 
+          <div>
+            <Image
+              src="/support-ticket.png"
+              alt="Support Ticket"
+              width={300}
               height={250}
               className="rounded-lg shadow-lg"
             />

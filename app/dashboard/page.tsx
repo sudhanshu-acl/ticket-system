@@ -5,6 +5,7 @@ import { sampleTickets } from '../data/tickets'
 import { User } from '@/app/utils/type'
 import { IncidentTicket, Status } from '../data/dummy'
 import { getTickets } from '../actions/tickets/getTicket'
+import TicketAnalyticsModal from '../components/TicketAnalyticsModal'
 
 const DashboardPage = () => {
   const [tickets, setTickets] = useState<IncidentTicket[]>([])
@@ -12,6 +13,7 @@ const DashboardPage = () => {
   const [user, setUser] = useState<User | null>(null)
   const [selectedTicket, setSelectedTicket] = useState<IncidentTicket | null>(null)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [isAnalyticsModalOpen, setAnalyticsModalOpen] = useState(false)
   const [newStatus, setNewStatus] = useState<Status>('Open')
   const [resolvedBy, setResolvedBy] = useState('')
 
@@ -157,7 +159,7 @@ const DashboardPage = () => {
           <h2 className="text-lg font-semibold text-slate-900">Recent Tickets</h2>
           {user?.role === 'admin' && (
             <button
-              onClick={() => window.location.href = '/dashboard/reports'}
+              onClick={() => setAnalyticsModalOpen(true)}
               className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors"
             >
               <span>✨</span> AI Analysis
@@ -287,6 +289,12 @@ const DashboardPage = () => {
           onClick={() => setIsSidebarOpen(false)}
         />
       )}
+
+      {/* AI Analytics Modal */}
+      <TicketAnalyticsModal
+        isOpen={isAnalyticsModalOpen}
+        onClose={() => setAnalyticsModalOpen(false)}
+      />
     </div>
   )
 }

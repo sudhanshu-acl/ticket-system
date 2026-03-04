@@ -31,13 +31,15 @@ const Sidebar: React.FC<SidebarProps> = ({ user, onCollapsedChange }) => {
       admin: [
         { label: 'Dashboard', href: '/dashboard', icon: '📊' },
         { label: 'Users', href: '/dashboard/users', icon: '👥' },
-        { label: 'Reports', href: '/dashboard/reports', icon: '📈' },
+        { label: 'Reports', href: '/dashboard/reports', icon: '📋' },
+        { label: 'Analytics', href: '/dashboard/analytics', icon: '📈' },
         { label: 'Settings', href: '/dashboard/settings', icon: '⚙️' },
       ],
       support: [
         { label: 'Dashboard', href: '/dashboard', icon: '📊' },
         { label: 'Queue', href: '/dashboard/queue', icon: '📋' },
-        { label: 'Reports', href: '/dashboard/reports', icon: '📈' },
+        { label: 'Reports', href: '/dashboard/reports', icon: '📋' },
+        { label: 'Analytics', href: '/dashboard/analytics', icon: '📈' },
       ],
       user: baseItems,
     }

@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { sampleTickets } from '../data/tickets'
 import { User } from '@/app/utils/type'
 import { IncidentTicket, Status } from '../data/dummy'
 import { getTickets } from '../actions/tickets/getTicket'

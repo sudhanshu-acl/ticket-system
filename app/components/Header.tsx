@@ -4,14 +4,18 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { navigationItems } from '../data/navigation';
 import { useAuth } from '../context/AuthContext';
+import { redirect, usePathname } from 'next/navigation';
 
 const Header = () => {
+    const pathname = usePathname();
     const { user, logout } = useAuth();
     const isAdmin = user?.role === 'admin';
+    const isTicket = pathname === '/ticket' || pathname === '/';
+    if (isAdmin && isTicket) redirect('/dashboard')
 
     return (
         <>
-            {!isAdmin && <header className="flex shadow-md py-4 px-4 sm:px-10 bg-white min-h-[70px] tracking-wide relative z-50">
+            <header className="flex shadow-md py-4 px-4 sm:px-10 bg-white min-h-[70px] tracking-wide relative z-50">
                 <div className="flex flex-wrap items-center justify-between gap-5 w-full">
                     <Link href="/" className="max-sm:hidden">
                         <Image src="/logoipsum-418.png" alt="logo" width={144} height={40} />
@@ -90,7 +94,7 @@ const Header = () => {
                         </button>
                     </div>
                 </div>
-            </header>}
+            </header>
         </>
     )
 }

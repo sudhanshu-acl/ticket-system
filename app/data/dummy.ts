@@ -21,7 +21,7 @@ export interface Attachment {
 }
 
 export interface IncidentTicket {
-  ticketId?: string;
+  _id: string;
   title: string;
   description: string;
   category: string;

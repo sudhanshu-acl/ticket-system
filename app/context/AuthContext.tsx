@@ -36,12 +36,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             try {
                 setUser(JSON.parse(storedUser));
                 setToken(storedToken);
+
+                // If user is already logged in, don't allow them on login or signup pages
+                const currentPath = window.location.pathname;
+                if (currentPath === '/login' || currentPath === '/signup') {
+                    router.push('/'); // Redirecting them to tickets page, you can change this to '/' if preferred
+                }
+
             } catch (error) {
                 console.error('Failed to parse user from local storage', error);
             }
         }
         setLoading(false);
-    }, []);
+    }, [router]);
 
     const login = (userData: User, tokenData: string) => {
         setUser(userData);

@@ -30,14 +30,12 @@ const Sidebar: React.FC<SidebarProps> = ({ user, onCollapsedChange }) => {
     const roleItems: Record<UserRole, typeof baseItems> = {
       admin: [
         { label: 'Dashboard', href: '/dashboard', icon: '📊' },
-        { label: 'All Tickets', href: '/ticket', icon: '🎫' },
         { label: 'Users', href: '/dashboard/users', icon: '👥' },
         { label: 'Reports', href: '/dashboard/reports', icon: '📈' },
         { label: 'Settings', href: '/dashboard/settings', icon: '⚙️' },
       ],
       support: [
         { label: 'Dashboard', href: '/dashboard', icon: '📊' },
-        { label: 'All Tickets', href: '/ticket', icon: '🎫' },
         { label: 'Queue', href: '/dashboard/queue', icon: '📋' },
         { label: 'Reports', href: '/dashboard/reports', icon: '📈' },
       ],

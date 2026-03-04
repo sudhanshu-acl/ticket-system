@@ -153,8 +153,16 @@ const DashboardPage = () => {
 
       {/* Recent Tickets */}
       <div className="bg-white rounded-lg shadow">
-        <div className="px-6 py-4 border-b border-gray-200">
+        <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
           <h2 className="text-lg font-semibold text-slate-900">Recent Tickets</h2>
+          {user?.role === 'admin' && (
+            <button
+              onClick={() => window.location.href = '/dashboard/reports'}
+              className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-md transition-colors"
+            >
+              <span>✨</span> AI Analysis
+            </button>
+          )}
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full">

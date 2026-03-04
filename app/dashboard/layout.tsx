@@ -20,7 +20,12 @@ export default function DashboardLayout({
     // Get user from localStorage
     const storedUser = localStorage.getItem('user')
     if (storedUser) {
-      setUser(JSON.parse(storedUser))
+      const parsedUser = JSON.parse(storedUser)
+      setUser(parsedUser)
+      // Redirect to home if user is 'user'
+      if (parsedUser.role === 'user') {
+        window.location.href = '/'
+      }
     } else {
       // Redirect to login if no user
       window.location.href = '/login'
@@ -39,12 +44,14 @@ export default function DashboardLayout({
     )
   }
 
-  const mainMargin = sidebarCollapsed ? '5rem' : '16rem'
+  // Default to collapsed view (no Sidebar) if user role is 'user', otherwise handle via state
+  const isNormalUser = user?.role === 'user'
+  const mainMargin = isNormalUser ? '0' : (sidebarCollapsed ? '5rem' : '16rem')
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-      {/* Sidebar */}
-      <Sidebar user={user} onCollapsedChange={setSidebarCollapsed} />
+      {/* Sidebar for Admins & Support */}
+      {!isNormalUser && <Sidebar user={user} onCollapsedChange={setSidebarCollapsed} />}
 
       {/* Main Content */}
       <div className="flex-1 transition-all duration-300" style={{ marginLeft: mainMargin }}>

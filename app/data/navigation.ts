@@ -9,5 +9,4 @@ export const navigationItems: NavItem[] = [
     { label: 'Blog', href: '/blog' },
     { label: 'About', href: '/about' },
     { label: 'Contact', href: '/contact' },
-    
 ];

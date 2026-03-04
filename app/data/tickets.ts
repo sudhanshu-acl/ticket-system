@@ -2,7 +2,7 @@ import { IncidentTicket } from './dummy';
 
 export const sampleTickets: IncidentTicket[] = [
   {
-    ticketId: "TKT-001",
+    _id: "TKT-001",
     title: "Server downtime issue",
     description: "Production server is not responding",
     category: "Infrastructure",
@@ -24,7 +24,7 @@ export const sampleTickets: IncidentTicket[] = [
     createdAt: "2024-01-15T10:30:00Z"
   },
   {
-    ticketId: "TKT-002",
+    _id: "TKT-002",
     title: "Unable to access dashboard",
     description: "Getting 403 error when accessing admin dashboard",
     category: "Access Management",
@@ -41,7 +41,7 @@ export const sampleTickets: IncidentTicket[] = [
     createdAt: "2024-01-14T14:20:00Z"
   },
   {
-    ticketId: "TKT-003",
+    _id: "TKT-003",
     title: "Software update request",
     description: "Need to update Node.js to latest version",
     category: "Software",
@@ -58,7 +58,7 @@ export const sampleTickets: IncidentTicket[] = [
     createdAt: "2024-01-13T09:15:00Z"
   },
   {
-    ticketId: "TKT-004",
+    _id: "TKT-004",
     title: "Cloud deployment failed",
     description: "CI/CD pipeline failing on production deployment",
     category: "Cloud & DevOps",
@@ -80,7 +80,7 @@ export const sampleTickets: IncidentTicket[] = [
     createdAt: "2024-01-12T16:45:00Z"
   },
   {
-    ticketId: "TKT-005",
+    _id: "TKT-005",
     title: "Security vulnerability found",
     description: "Potential XSS vulnerability in login form",
     category: "Security",

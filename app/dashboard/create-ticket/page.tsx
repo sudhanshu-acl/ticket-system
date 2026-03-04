@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { TicketFormData } from '@/app/components/CreateTicketModal'
 import { Priority, category, IncidentTicket } from '@/app/data/dummy'
 import { useState } from 'react'
+import { Toast, ToastType } from '@/app/components/toast'
 
 export default function CreateTicketFullPage() {
   const [formData, setFormData] = useState<TicketFormData>({
@@ -15,6 +16,7 @@ export default function CreateTicketFullPage() {
   })
 
   const [loading, setLoading] = useState(false)
+  const [toast, setToast] = useState<{ message: string, type: ToastType } | null>(null)
 
   const categories: category[] = [
     'Infrastructure',
@@ -41,10 +43,11 @@ export default function CreateTicketFullPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
+    setToast(null)
 
     setTimeout(() => {
       console.log('New ticket created via full page:', formData)
-      alert(`Ticket created: ${formData.title}`)
+      setToast({ message: `Ticket created: ${formData.title}`, type: 'success' })
       setFormData({
         title: '',
         description: '',
@@ -57,6 +60,11 @@ export default function CreateTicketFullPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
+      {toast && (
+        <div className="fixed top-4 right-4 z-50">
+          <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />
+        </div>
+      )}
       <div className="max-w-2xl mx-auto">
         <Link href="/dashboard" className="text-blue-600 hover:underline mb-6 inline-block">
           ← Back to Dashboard

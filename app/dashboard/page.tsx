@@ -2,10 +2,17 @@
 
 import React, { useEffect, useState } from 'react'
 import { sampleTickets } from '../data/tickets'
-
+import { User } from '@/app/utils/type'
+import { IncidentTicket, Status } from '../data/dummy'
 
 const DashboardPage = () => {
-  const [tickets, setTickets] = useState(sampleTickets.slice(0, 5))
+  const [tickets, setTickets] = useState<IncidentTicket[]>(sampleTickets)
+  const [user, setUser] = useState<User | null>(null)
+  const [selectedTicket, setSelectedTicket] = useState<IncidentTicket | null>(null)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [newStatus, setNewStatus] = useState<Status>('Open')
+  const [resolvedBy, setResolvedBy] = useState('')
+
   const [stats, setStats] = useState({
     totalTickets: 0,
     openTickets: 0,
@@ -14,15 +21,47 @@ const DashboardPage = () => {
   })
 
   useEffect(() => {
-    // Calculate stats
-    const stats = {
-      totalTickets: sampleTickets.length,
-      openTickets: sampleTickets.filter((t) => t.status === 'Open').length,
-      inProgress: sampleTickets.filter((t) => t.status === 'In Progress').length,
-      resolved: sampleTickets.filter((t) => t.status === 'Resolved').length,
+    const storedUser = localStorage.getItem('user')
+    if (storedUser) {
+      setUser(JSON.parse(storedUser))
     }
-    setStats(stats)
-  }, [])
+
+    const currentStats = {
+      totalTickets: tickets.length,
+      openTickets: tickets.filter((t) => t.status === 'Open').length,
+      inProgress: tickets.filter((t) => t.status === 'In Progress').length,
+      resolved: tickets.filter((t) => t.status === 'Resolved').length,
+    }
+    setStats(currentStats)
+  }, [tickets])
+
+  const handleRowClick = (ticket: IncidentTicket) => {
+    if (user?.role === 'admin') {
+      setSelectedTicket(ticket)
+      setNewStatus(ticket.status)
+      setResolvedBy('') // could be prepopulated if it existed on the dummy ticket
+      setIsSidebarOpen(true)
+    }
+  }
+
+  const handleUpdateTicket = () => {
+    if (!selectedTicket) return
+
+    const updatedTickets = tickets.map((t) => {
+      if (t._id === selectedTicket._id) {
+        return {
+          ...t,
+          status: newStatus,
+          // 'resolvedBy' is not strictly in IncidentTicket by default but we can simulate saving it
+        }
+      }
+      return t
+    })
+
+    setTickets(updatedTickets)
+    setIsSidebarOpen(false)
+    setSelectedTicket(null)
+  }
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
@@ -95,8 +134,12 @@ const DashboardPage = () => {
             </thead>
             <tbody className="divide-y divide-gray-200">
               {tickets.map((ticket) => (
-                <tr key={ticket.ticketId} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 text-sm font-semibold text-blue-600">{ticket.ticketId}</td>
+                <tr
+                  key={ticket._id}
+                  className={`hover:bg-gray-50 ${user?.role === 'admin' ? 'cursor-pointer' : ''}`}
+                  onClick={() => handleRowClick(ticket)}
+                >
+                  <td className="px-6 py-4 text-sm font-semibold text-blue-600">{ticket._id}</td>
                   <td className="px-6 py-4 text-sm text-slate-900">{ticket.title}</td>
                   <td className="px-6 py-4 text-sm text-slate-600">{ticket.category}</td>
                   <td className="px-6 py-4">
@@ -116,6 +159,90 @@ const DashboardPage = () => {
           </table>
         </div>
       </div>
+
+      {/* Admin Edit Sidebar */}
+      {isSidebarOpen && selectedTicket && (
+        <div className="fixed inset-y-0 right-0 w-96 bg-white shadow-2xl border-l border-gray-200 z-50 transform transition-transform duration-300">
+          <div className="h-full flex flex-col">
+            <div className="p-6 border-b border-gray-200 flex justify-between items-center">
+              <h3 className="text-xl font-bold text-slate-900">Update Ticket</h3>
+              <button
+                onClick={() => setIsSidebarOpen(false)}
+                className="text-gray-400 hover:text-gray-600 focus:outline-none"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="p-6 flex-1 overflow-y-auto space-y-6">
+              <div>
+                <p className="text-sm font-medium text-gray-500">Ticket ID</p>
+                <p className="mt-1 font-semibold text-slate-900">{selectedTicket._id}</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-gray-500">Title</p>
+                <p className="mt-1 text-slate-900">{selectedTicket.title}</p>
+              </div>
+
+              <div className="border-t border-gray-200 pt-6">
+                <label className="block text-sm font-medium text-slate-900 mb-2">
+                  Update Status
+                </label>
+                <select
+                  value={newStatus}
+                  onChange={(e) => setNewStatus(e.target.value as Status)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="Open">Open</option>
+                  <option value="In Progress">In Progress</option>
+                  <option value="Resolved">Resolved</option>
+                  <option value="Closed">Closed</option>
+                </select>
+              </div>
+
+              {(newStatus === 'Resolved' || newStatus === 'Closed') && (
+                <div>
+                  <label className="block text-sm font-medium text-slate-900 mb-2">
+                    Resolved By
+                  </label>
+                  <input
+                    type="text"
+                    value={resolvedBy}
+                    onChange={(e) => setResolvedBy(e.target.value)}
+                    placeholder="Enter name or ID"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+              )}
+            </div>
+
+            <div className="p-6 border-t border-gray-200 bg-gray-50">
+              <div className="flex justify-end gap-3">
+                <button
+                  onClick={() => setIsSidebarOpen(false)}
+                  className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleUpdateTicket}
+                  className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700"
+                >
+                  Save Changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Backdrop for the sidebar */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/20 z-40 backdrop-blur-sm"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
     </div>
   )
 }

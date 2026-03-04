@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import { Priority, category } from '@/app/data/dummy'
+import { Toast, ToastType } from './toast'
 
 interface CreateTicketModalProps {
   isOpen: boolean
@@ -25,6 +26,7 @@ const CreateTicketModal: React.FC<CreateTicketModalProps> = ({ isOpen, onClose, 
   })
 
   const [loading, setLoading] = useState(false)
+  const [toast, setToast] = useState<{ message: string, type: ToastType } | null>(null)
 
   const categories: category[] = [
     'Infrastructure',
@@ -50,18 +52,22 @@ const CreateTicketModal: React.FC<CreateTicketModalProps> = ({ isOpen, onClose, 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
+    setToast(null)
 
     // Simulate API call
     setTimeout(() => {
       onSubmit(formData)
+      setToast({ message: 'Ticket created successfully!', type: 'success' })
       setFormData({
         title: '',
         description: '',
         category: 'Infrastructure',
         priority: 'Medium'
       })
-      setLoading(false)
-      onClose()
+      setTimeout(() => {
+        setLoading(false)
+        onClose()
+      }, 700)
     }, 500)
   }
 
@@ -69,6 +75,11 @@ const CreateTicketModal: React.FC<CreateTicketModalProps> = ({ isOpen, onClose, 
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+      {toast && (
+        <div className="fixed top-4 right-4 z-[60]">
+          <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />
+        </div>
+      )}
       <div className="bg-white rounded-lg shadow-lg w-full max-w-lg mx-4">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200">

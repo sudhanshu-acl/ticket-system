@@ -4,10 +4,11 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { useAuth } from '../context/AuthContext'
+import { Toast, ToastType } from './toast'
 
 const Login = () => {
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
+  const [toast, setToast] = useState<{ message: string, type: ToastType } | null>(null)
   const router = useRouter()
   const { login } = useAuth()
   const [formData, setFormData] = useState({
@@ -26,7 +27,7 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
-    setError('')
+    setToast(null)
 
     try {
       const res = await fetch('/api/auth/login', {
@@ -40,17 +41,20 @@ const Login = () => {
       const data = await res.json()
 
       if (!res.ok) {
-        setError(data.message || 'Login failed')
+        setToast({ message: data.message || 'Login failed', type: 'danger' })
         return
       }
 
       // Store user info and token globally via context
       login(data.data.user, data.data.token)
+      setToast({ message: 'Login successful!', type: 'success' })
 
       // Redirect to dashboard
-      router.push('/dashboard')
+      setTimeout(() => {
+        router.push('/dashboard')
+      }, 700)
     } catch (err) {
-      setError('An error occurred. Please try again.')
+      setToast({ message: 'An error occurred. Please try again.', type: 'danger' })
       console.error(err)
     } finally {
       setLoading(false)
@@ -59,12 +63,16 @@ const Login = () => {
 
   return (
     <div className="bg-gray-50">
+      {toast && (
+        <div className="fixed top-4 right-4 z-50">
+          <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />
+        </div>
+      )}
       <div className="min-h-screen flex flex-col items-center justify-center py-6 px-4">
         <div className="max-w-[480px] w-full">
 
           <div className="p-6 sm:p-8 rounded-2xl bg-white border border-gray-200 shadow-sm">
             <h1 className="text-slate-900 text-center text-3xl font-semibold">Sign in</h1>
-            {error && <div className="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">{error}</div>}
             <form className="mt-12 space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label className="text-slate-900 text-sm font-medium mb-2 block">User name</label>

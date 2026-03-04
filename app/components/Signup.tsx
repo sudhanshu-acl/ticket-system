@@ -2,10 +2,12 @@
 
 import React, { useState } from 'react';
 
+import { Toast, ToastType } from './toast';
+
 const Signup = () => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-  
+  const [toast, setToast] = useState<{ message: string, type: ToastType } | null>(null);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,7 +23,7 @@ const Signup = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setToast(null);
 
     try {
       const res = await fetch('/api/auth/register', {
@@ -31,13 +33,21 @@ const Signup = () => {
       });
       const data = await res.json();
       if (!res.ok) {
-        setError(data.error || 'Registration failed');
+        setToast({ message: data.error || 'Registration failed', type: 'danger' });
         return;
       }
       localStorage.setItem('user', JSON.stringify(data.user));
+      setToast({ message: 'Registration successful!', type: 'success' });
+
+      // Reset form on success (optional)
+      setFormData({ name: '', email: '', password: '', jobTitle: '' });
+      setTimeout(() => {
+        // Here you could programmatically redirect
+        setToast(null);
+      }, 3000);
     } catch (err) {
       console.error(err);
-      setError('An error occurred. Please try again.');
+      setToast({ message: 'An error occurred. Please try again.', type: 'danger' });
     } finally {
       setLoading(false);
     }
@@ -49,11 +59,6 @@ const Signup = () => {
         <div className="max-w-[480px] w-full">
           <div className="p-6 sm:p-8 rounded-2xl bg-white border border-gray-200 shadow-sm">
             <h1 className="text-slate-900 text-center text-3xl font-semibold">Register</h1>
-            {error && (
-              <div className="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
-                {error}
-              </div>
-            )}
             <form className="mt-12 space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label className="text-slate-900 text-sm font-medium mb-2 block">Name</label>
@@ -128,6 +133,11 @@ const Signup = () => {
           </div>
         </div>
       </div>
+      {toast && (
+        <div className="fixed top-4 right-4 z-50">
+          <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />
+        </div>
+      )}
     </div>
   );
 };

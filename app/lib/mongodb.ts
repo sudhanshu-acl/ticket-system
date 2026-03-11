@@ -8,27 +8,33 @@ if (!MONGODB_URI) {
 }
 
 // Connection function
+let cached = (global as any).mongoose;
+
+if (!cached) {
+  cached = (global as any).mongoose = { conn: null, promise: null };
+}
+
 export const connectDB = async (): Promise<void> => {
-  try {
+  if (cached.conn) {
+    return cached.conn;
+  }
+
+  if (!cached.promise) {
     const connectionString = MONGODB_URI;
-    const conn = await mongoose.connect(connectionString, {
-      // serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
+    cached.promise = mongoose.connect(connectionString, {
       socketTimeoutMS: 45000, // Close sockets after 45s of inactivity
       readPreference: 'secondaryPreferred'
+    }).then((mongoose) => {
+      console.log('✅ Mongoose connected to DB');
+      return mongoose;
     });
+  }
 
-    console.log('✅ Mongoose connected to DB');
-
-
-    // Handle process termination
-    process.on('SIGINT', async () => {
-      console.error('❌ Mongoose connection disconnected');
-      await mongoose.connection.close();
-      process.exit(0);
-    });
-
+  try {
+    cached.conn = await cached.promise;
   } catch (error) {
+    cached.promise = null;
     console.error('❌ Mongoose connection error:', error);
-    process.exit(1);
+    throw error;
   }
 };

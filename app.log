@@ -118,3 +118,15 @@
 [2026-03-05T06:05:02.232Z] [DEBUG] [LOGIN] Connected to database | {"email":"admin1@gmail.com"}
 [2026-03-05T06:05:02.360Z] [DEBUG] [LOGIN] JWT token generated | {"email":"admin1@gmail.com"}
 [2026-03-05T06:05:02.363Z] [INFO] [AUTH] LOGIN succeeded | {"email":"admin1@gmail.com"}
+[2026-03-11T05:48:52.292Z] [INFO] [LOGIN] Login attempt | {"email":"admin1@gmail.com"}
+[2026-03-11T05:48:52.708Z] [DEBUG] [LOGIN] Connected to database | {"email":"admin1@gmail.com"}
+[2026-03-11T05:48:53.004Z] [DEBUG] [LOGIN] JWT token generated | {"email":"admin1@gmail.com"}
+[2026-03-11T05:48:53.008Z] [INFO] [AUTH] LOGIN succeeded | {"email":"admin1@gmail.com"}
+[2026-03-11T07:04:19.199Z] [INFO] [LOGIN] Login attempt | {"email":"user5@gmail.com"}
+[2026-03-11T07:04:19.208Z] [DEBUG] [LOGIN] Connected to database | {"email":"user5@gmail.com"}
+[2026-03-11T07:04:19.419Z] [DEBUG] [LOGIN] JWT token generated | {"email":"user5@gmail.com"}
+[2026-03-11T07:04:19.425Z] [INFO] [AUTH] LOGIN succeeded | {"email":"user5@gmail.com"}
+[2026-03-11T07:23:24.905Z] [INFO] [LOGIN] Login attempt | {"email":"admin1@gmail.com"}
+[2026-03-11T07:23:24.909Z] [DEBUG] [LOGIN] Connected to database | {"email":"admin1@gmail.com"}
+[2026-03-11T07:23:25.141Z] [DEBUG] [LOGIN] JWT token generated | {"email":"admin1@gmail.com"}
+[2026-03-11T07:23:25.144Z] [INFO] [AUTH] LOGIN succeeded | {"email":"admin1@gmail.com"}

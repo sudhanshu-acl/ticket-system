@@ -1,24 +1,10 @@
 import { NextResponse, NextRequest } from 'next/server';
-import jwt from 'jsonwebtoken';
+import { verifyAuth } from '@/app/lib/auth';
 import { connectDB } from '@/app/lib/mongodb';
-import User from '@/app/models/user';
 import Ticket from '@/app/models/ticket';
 import { GoogleGenAI } from '@google/genai';
 
 const ai = new GoogleGenAI({});
-
-const verifyAuth = async (request: NextRequest) => {
-    const token = request.cookies.get('token')?.value;
-    if (!token) return null;
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET || 'change-me') as any;
-        await connectDB();
-        const user = await User.findById(decoded.userId);
-        return user;
-    } catch (err) {
-        return null;
-    }
-};
 
 export async function GET(request: NextRequest) {
     const user = await verifyAuth(request);

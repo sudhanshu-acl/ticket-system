@@ -1,26 +1,11 @@
 import { NextResponse, NextRequest } from 'next/server';
-import jwt from 'jsonwebtoken';
-import { connectDB } from '@/app/lib/mongodb';
-import User from '@/app/models/user';
+import { verifyAuth } from '@/app/lib/auth';
 import fs from 'fs';
 import path from 'path';
 import { GoogleGenAI } from '@google/genai';
 
 // Initialize the SDK. It will automatically use process.env.GEMINI_API_KEY
-const ai = new GoogleGenAI({});
-
-const verifyAuth = async (request: NextRequest) => {
-    const token = request.cookies.get('token')?.value;
-    if (!token) return null;
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET || 'change-me') as any;
-        await connectDB();
-        const user = await User.findById(decoded.userId);
-        return user;
-    } catch (err) {
-        return null;
-    }
-};
+export const ai = new GoogleGenAI({});
 
 export async function GET(request: NextRequest) {
     const user = await verifyAuth(request);

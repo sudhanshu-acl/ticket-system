@@ -3,24 +3,11 @@ import { NextResponse, NextRequest } from 'next/server';
 import { connectDB } from '@/app/lib/mongodb';
 import Ticket from '@/app/models/ticket';
 import User from '@/app/models/user';
-import jwt from 'jsonwebtoken';
-
-const verifyAuth = async (request: NextRequest) => {
-    const token = request.cookies.get('token')?.value;
-    if (!token) return null;
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET || 'change-me') as any;
-        await connectDB();
-        const user = await User.findById(decoded.userId);
-        return user;
-    } catch (err) {
-        return null;
-    }
-};
+import { verifyAuth } from '@/app/lib/auth';
 
 export async function PUT(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     const user = await verifyAuth(request);
     if (!user || user.role !== 'admin') {

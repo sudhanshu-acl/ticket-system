@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { IncidentTicket } from '../data/dummy';
 import { getPriorityColor, getStatusColor } from '../utils/helper';
 import CreateTicketModal, { TicketFormData } from '../components/CreateTicketModal';
 import { useAuth } from '../context/AuthContext';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getTickets } from '../actions/tickets/getTicket';
-
 
 const TicketCard = ({ ticket }: { ticket: IncidentTicket }) => (
   <div className="bg-white rounded-lg shadow-md p-4 border border-gray-200">
@@ -75,33 +75,72 @@ const TicketTable = ({ tickets }: { tickets: IncidentTicket[] }) => (
   </div>
 );
 
+const TableSkeleton = () => (
+  <div className="overflow-x-auto bg-white rounded-lg shadow">
+    <table className="min-w-full divide-y divide-gray-200">
+      <thead className="bg-gray-50">
+        <tr>
+          {[...Array(7)].map((_, i) => (
+            <th key={i} className="px-6 py-3 text-left">
+              <div className="h-4 bg-gray-200 rounded animate-pulse w-full max-w-[100px]"></div>
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody className="bg-white divide-y divide-gray-200">
+        {[...Array(5)].map((_, rowIndex) => (
+          <tr key={rowIndex}>
+            {[...Array(7)].map((_, colIndex) => (
+              <td key={colIndex} className="px-6 py-4 whitespace-nowrap">
+                <div className="h-4 bg-gray-200 rounded animate-pulse w-full max-w-[150px]"></div>
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
+
+const CardsSkeleton = () => (
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    {[...Array(6)].map((_, i) => (
+      <div key={i} className="bg-white rounded-lg shadow-md p-4 border border-gray-200 animate-pulse">
+        <div className="flex justify-between items-start mb-3">
+          <div className="h-4 bg-gray-200 rounded w-1/4"></div>
+          <div className="h-6 bg-gray-200 rounded-full w-16"></div>
+        </div>
+        <div className="h-6 bg-gray-200 rounded w-3/4 mb-2"></div>
+        <div className="h-4 bg-gray-200 rounded w-full mb-1"></div>
+        <div className="h-4 bg-gray-200 rounded w-5/6 mb-3"></div>
+        <div className="flex gap-2 mb-3">
+          <div className="h-6 bg-gray-200 rounded-full w-16"></div>
+          <div className="h-6 bg-gray-200 rounded-full w-20"></div>
+        </div>
+        <div className="space-y-2">
+          <div className="h-3 bg-gray-200 rounded w-1/3"></div>
+          <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
 export default function TicketPage() {
+  const queryClient = useQueryClient();
   const { user } = useAuth();
   const [viewMode, setViewMode] = useState<'table' | 'cards'>('table');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [tickets, setTickets] = useState<IncidentTicket[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
 
-  const fetchTickets = async () => {
-    setIsLoading(true);
-    try {
+  const { data: ticketsData, isLoading } = useQuery({
+    queryKey: ['tickets'],
+    queryFn: async () => {
       const data = await getTickets();
-      if (Array.isArray(data)) {
-        setTickets(data);
-      } else {
-        setTickets([]);
-      }
-    } catch (error) {
-      console.error('Failed to fetch tickets:', error);
-      setTickets([]);
-    } finally {
-      setIsLoading(false);
+      return Array.isArray(data) ? data : [];
     }
-  };
+  });
 
-  useEffect(() => {
-    fetchTickets();
-  }, []);
+  const tickets = ticketsData || [];
 
   const handleCreateTicket = async (data: TicketFormData) => {
 
@@ -125,7 +164,7 @@ export default function TicketPage() {
 
     if (response.ok) {
       setIsModalOpen(false);
-      fetchTickets(); // Refresh the list after creating a ticket
+      queryClient.invalidateQueries({ queryKey: ['tickets'] });
     }
   };
 
@@ -181,7 +220,7 @@ export default function TicketPage() {
 
         {/* Content based on view mode */}
         {isLoading ? (
-          <div className="text-center py-8 text-gray-500">Loading tickets...</div>
+          viewMode === 'table' ? <TableSkeleton /> : <CardsSkeleton />
         ) : viewMode === 'table' ? (
           <TicketTable tickets={tickets} />
         ) : (

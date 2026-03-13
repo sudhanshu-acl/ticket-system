@@ -130,3 +130,30 @@
 [2026-03-11T07:23:24.909Z] [DEBUG] [LOGIN] Connected to database | {"email":"admin1@gmail.com"}
 [2026-03-11T07:23:25.141Z] [DEBUG] [LOGIN] JWT token generated | {"email":"admin1@gmail.com"}
 [2026-03-11T07:23:25.144Z] [INFO] [AUTH] LOGIN succeeded | {"email":"admin1@gmail.com"}
+[2026-03-13T11:49:28.810Z] [INFO] | / [MIDDLEWARE] GET | {"url":"http://localhost:3000/"}
+[2026-03-13T11:49:31.695Z] [INFO] | /support-ticket.png [MIDDLEWARE] GET | {"url":"http://localhost:3000/support-ticket.png"}
+[2026-03-13T11:49:31.702Z] [INFO] | /logoipsum-418.png [MIDDLEWARE] GET | {"url":"http://localhost:3000/logoipsum-418.png"}
+[2026-03-13T11:49:33.871Z] [INFO] | /ticket [MIDDLEWARE] GET | {"url":"http://localhost:3000/ticket"}
+[2026-03-13T11:49:36.670Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-13T11:49:37.546Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-13T11:49:53.760Z] [INFO] [LOGIN] Login attempt | {"email":"user5@gmail.com"}
+[2026-03-13T11:49:54.094Z] [DEBUG] [LOGIN] Connected to database | {"email":"user5@gmail.com"}
+[2026-03-13T11:49:54.419Z] [DEBUG] [LOGIN] JWT token generated | {"email":"user5@gmail.com"}
+[2026-03-13T11:49:54.422Z] [INFO] [AUTH] LOGIN succeeded | {"email":"user5@gmail.com"}
+[2026-03-13T11:49:55.176Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-13T11:49:56.343Z] [INFO] | / [MIDDLEWARE] GET | {"url":"http://localhost:3000/"}
+[2026-03-13T11:50:00.183Z] [INFO] | /ticket [MIDDLEWARE] GET | {"url":"http://localhost:3000/ticket"}
+[2026-03-13T11:50:05.214Z] [INFO] | /ticket [MIDDLEWARE] GET | {"url":"http://localhost:3000/ticket"}
+[2026-03-13T11:50:07.809Z] [INFO] | /ticket [MIDDLEWARE] GET | {"url":"http://localhost:3000/ticket"}
+[2026-03-13T11:51:35.492Z] [INFO] | /ticket [MIDDLEWARE] GET | {"url":"http://localhost:3000/ticket"}
+[2026-03-13T11:51:54.589Z] [INFO] | /ticket [MIDDLEWARE] GET | {"url":"http://localhost:3000/ticket"}
+[2026-03-13T11:51:55.134Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-13T11:52:11.874Z] [INFO] [LOGIN] Login attempt | {"email":"user5@gmail.com"}
+[2026-03-13T11:52:11.876Z] [DEBUG] [LOGIN] Connected to database | {"email":"user5@gmail.com"}
+[2026-03-13T11:52:12.052Z] [DEBUG] [LOGIN] JWT token generated | {"email":"user5@gmail.com"}
+[2026-03-13T11:52:12.056Z] [INFO] [AUTH] LOGIN succeeded | {"email":"user5@gmail.com"}
+[2026-03-13T11:52:12.784Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-13T11:52:13.207Z] [INFO] | / [MIDDLEWARE] GET | {"url":"http://localhost:3000/"}
+[2026-03-13T11:52:14.515Z] [INFO] | /ticket [MIDDLEWARE] GET | {"url":"http://localhost:3000/ticket"}
+[2026-03-13T11:52:15.229Z] [INFO] | /ticket [MIDDLEWARE] GET | {"url":"http://localhost:3000/ticket"}
+[2026-03-13T11:52:17.965Z] [INFO] | /ticket [MIDDLEWARE] GET | {"url":"http://localhost:3000/ticket"}

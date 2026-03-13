@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server';
 import logger from './app/lib/logger';
 
 // This function can be marked `async` if using `await` inside
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
     // Log the current request URL and method using the custom logger
     logger.middleware(request.nextUrl.pathname, request.method, { url: request.url });
 

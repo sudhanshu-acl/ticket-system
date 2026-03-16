@@ -16,7 +16,7 @@ export async function PATCH(request: NextRequest) {
     const method = request.method;
 
     try {
-        const { name, role, jobTitle } = await request.json();
+        const { email, name, role, jobTitle } = await request.json();
         const userAuth = await verifyAuth(request);
 
         if (!userAuth) {
@@ -25,16 +25,27 @@ export async function PATCH(request: NextRequest) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
+        let targetEmail = userAuth.email;
+
+        if (email && email !== userAuth.email) {
+            if (userAuth.role !== 'admin') {
+                logger.api(pathname, method, 403, Date.now() - startTime);
+                logger.warn(`Forbidden attempt to update other user profile`, { by: userAuth.email, target: email }, pathname);
+                return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+            }
+            targetEmail = email;
+        }
+
         await connectDB();
 
         const user = await User.findOneAndUpdate(
-            { email: userAuth.email }, 
+            { email: targetEmail }, 
             { name, role, jobTitle }, 
             { new: true }
         ).select('-_id -password');
 
         logger.api(pathname, method, 200, Date.now() - startTime);
-        logger.info(`User profile updated successfully`, { email: userAuth.email }, pathname);
+        logger.info(`User profile updated successfully`, { targetEmail, updatedBy: userAuth.email }, pathname);
         
         return NextResponse.json({ message: 'User updated successful', data: user });
     } catch (error: unknown) {

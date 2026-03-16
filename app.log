@@ -157,3 +157,275 @@
 [2026-03-13T11:52:14.515Z] [INFO] | /ticket [MIDDLEWARE] GET | {"url":"http://localhost:3000/ticket"}
 [2026-03-13T11:52:15.229Z] [INFO] | /ticket [MIDDLEWARE] GET | {"url":"http://localhost:3000/ticket"}
 [2026-03-13T11:52:17.965Z] [INFO] | /ticket [MIDDLEWARE] GET | {"url":"http://localhost:3000/ticket"}
+[2026-03-16T09:13:41.943Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T09:13:41.951Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T09:13:41.962Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T09:13:42.761Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T09:13:42.769Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T09:13:43.730Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T09:13:43.993Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T09:13:44.000Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T09:13:44.442Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T09:13:44.449Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T09:13:44.453Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T09:13:44.458Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T09:13:44.462Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T09:14:17.797Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T09:14:18.250Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T09:14:18.710Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T09:14:18.748Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T09:14:19.271Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T09:14:19.594Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T09:14:20.279Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T09:14:20.706Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T09:14:21.242Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T09:14:21.303Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T09:20:33.238Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-16T09:20:35.597Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-16T09:20:38.973Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T09:20:41.524Z] [INFO] | /.well-known/appspecific/com.chrome.devtools.json [MIDDLEWARE] GET | {"url":"http://localhost:3000/.well-known/appspecific/com.chrome.devtools.json"}
+[2026-03-16T09:20:47.240Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T09:20:47.944Z] [INFO] | /.well-known/appspecific/com.chrome.devtools.json [MIDDLEWARE] GET | {"url":"http://localhost:3000/.well-known/appspecific/com.chrome.devtools.json"}
+[2026-03-16T09:20:48.621Z] [INFO] | /logoipsum-418.png [MIDDLEWARE] GET | {"url":"http://localhost:3000/logoipsum-418.png"}
+[2026-03-16T09:51:11.187Z] [INFO] | /dashboard/reports [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/reports"}
+[2026-03-16T09:51:18.822Z] [INFO] | /dashboard/analytics [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/analytics"}
+[2026-03-16T09:53:08.668Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T09:53:11.062Z] [INFO] | /dashboard/analytics [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/analytics"}
+[2026-03-16T09:53:12.863Z] [INFO] | /dashboard/reports [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/reports"}
+[2026-03-16T09:53:14.460Z] [INFO] | /dashboard/analytics [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/analytics"}
+[2026-03-16T09:53:15.488Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-16T09:53:17.283Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:06:44.448Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":29}
+[2026-03-16T10:06:44.451Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:14:57.263Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:14:57.271Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T10:14:58.311Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":46}
+[2026-03-16T10:14:58.315Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:15:24.564Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":35}
+[2026-03-16T10:15:24.568Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:18:12.709Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":25}
+[2026-03-16T10:18:12.711Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:18:16.324Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:18:17.780Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":33}
+[2026-03-16T10:18:17.786Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:18:20.534Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:18:21.525Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":32}
+[2026-03-16T10:18:21.529Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:18:24.666Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T10:18:25.764Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:18:25.904Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":25}
+[2026-03-16T10:18:25.906Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:18:27.629Z] [INFO] | /dashboard/reports [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/reports"}
+[2026-03-16T10:18:28.760Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:18:28.899Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":24}
+[2026-03-16T10:18:28.901Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:18:30.027Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T10:18:31.665Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:18:31.825Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":29}
+[2026-03-16T10:18:31.827Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:18:32.649Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T10:18:36.518Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:18:36.662Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":22}
+[2026-03-16T10:18:36.664Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:18:37.652Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T10:18:39.190Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:18:39.353Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":34}
+[2026-03-16T10:18:39.356Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:18:41.240Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T10:18:43.426Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:18:43.597Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":29}
+[2026-03-16T10:18:43.599Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:18:44.604Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T10:18:45.802Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:18:46.126Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":29}
+[2026-03-16T10:18:46.129Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:18:47.400Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T10:18:52.180Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T10:18:52.270Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T10:18:52.274Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:18:53.845Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:18:53.988Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":27}
+[2026-03-16T10:18:53.991Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:18:55.717Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T10:18:56.994Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:18:57.179Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":33}
+[2026-03-16T10:18:57.182Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:18:57.439Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":26}
+[2026-03-16T10:18:57.441Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:18:59.051Z] [INFO] | /dashboard/reports [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/reports"}
+[2026-03-16T10:19:00.489Z] [INFO] | /dashboard/analytics [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/analytics"}
+[2026-03-16T10:19:01.785Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-16T10:19:03.430Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T10:19:59.627Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:20:00.308Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":39}
+[2026-03-16T10:20:00.309Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:23:39.406Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":38}
+[2026-03-16T10:23:39.407Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:24:04.326Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":49}
+[2026-03-16T10:24:04.329Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:24:57.108Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":36}
+[2026-03-16T10:24:57.110Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:25:18.185Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:25:19.660Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":44}
+[2026-03-16T10:25:19.662Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:26:08.461Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":35}
+[2026-03-16T10:26:08.465Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:26:15.851Z] [INFO] | /dashboard/create-ticket [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/create-ticket"}
+[2026-03-16T10:26:24.533Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T10:26:31.354Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:26:31.500Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":27}
+[2026-03-16T10:26:31.502Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:28:16.422Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:28:18.583Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:28:37.950Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:28:39.095Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":45}
+[2026-03-16T10:28:39.102Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:28:41.178Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:28:41.780Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":32}
+[2026-03-16T10:28:41.782Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:28:43.564Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:28:44.106Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":27}
+[2026-03-16T10:28:44.108Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:29:19.281Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:29:20.962Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":26}
+[2026-03-16T10:29:20.964Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:29:23.819Z] [INFO] | /.well-known/appspecific/com.chrome.devtools.json [MIDDLEWARE] GET | {"url":"http://localhost:3000/.well-known/appspecific/com.chrome.devtools.json"}
+[2026-03-16T10:29:29.754Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:29:30.122Z] [INFO] | /.well-known/appspecific/com.chrome.devtools.json [MIDDLEWARE] GET | {"url":"http://localhost:3000/.well-known/appspecific/com.chrome.devtools.json"}
+[2026-03-16T10:29:31.337Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":49}
+[2026-03-16T10:29:31.340Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:30:01.232Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:30:30.254Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":34}
+[2026-03-16T10:30:30.256Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:30:37.685Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:30:38.164Z] [INFO] | /.well-known/appspecific/com.chrome.devtools.json [MIDDLEWARE] GET | {"url":"http://localhost:3000/.well-known/appspecific/com.chrome.devtools.json"}
+[2026-03-16T10:30:39.609Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":49}
+[2026-03-16T10:30:39.613Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:31:12.798Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-16T10:31:14.901Z] [INFO] | /dashboard/analytics [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/analytics"}
+[2026-03-16T10:31:15.819Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:31:16.348Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":45}
+[2026-03-16T10:31:16.350Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T10:31:39.385Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T10:31:39.885Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":32}
+[2026-03-16T10:31:39.887Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:15:02.469Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:15:02.539Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:15:03.872Z] [INFO] | /.well-known/appspecific/com.chrome.devtools.json [MIDDLEWARE] GET | {"url":"http://localhost:3000/.well-known/appspecific/com.chrome.devtools.json"}
+[2026-03-16T11:15:04.817Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-16T11:15:05.313Z] [INFO] [API] GET /api/user | {"status":401,"duration_ms":0}
+[2026-03-16T11:15:05.314Z] [WARN] | /api/user Unauthorized attempt to fetch all users | {}
+[2026-03-16T11:15:06.596Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":58}
+[2026-03-16T11:15:06.615Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:15:13.921Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":39}
+[2026-03-16T11:15:13.934Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:15:16.049Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:15:16.365Z] [INFO] | /.well-known/appspecific/com.chrome.devtools.json [MIDDLEWARE] GET | {"url":"http://localhost:3000/.well-known/appspecific/com.chrome.devtools.json"}
+[2026-03-16T11:15:17.757Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":31}
+[2026-03-16T11:15:17.759Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:15:26.573Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:15:27.142Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-16T11:15:39.532Z] [INFO] [LOGIN] Login attempt | {"email":"admin1@gmail.com"}
+[2026-03-16T11:15:39.535Z] [DEBUG] [LOGIN] Connected to database | {"email":"admin1@gmail.com"}
+[2026-03-16T11:15:39.738Z] [DEBUG] [LOGIN] JWT token generated | {"email":"admin1@gmail.com"}
+[2026-03-16T11:15:39.742Z] [INFO] [AUTH] LOGIN succeeded | {"email":"admin1@gmail.com"}
+[2026-03-16T11:15:40.481Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T11:15:44.584Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:15:44.779Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":29}
+[2026-03-16T11:15:44.782Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:15:47.847Z] [INFO] | /dashboard/analytics [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/analytics"}
+[2026-03-16T11:15:49.355Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-16T11:15:50.213Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:15:50.378Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":27}
+[2026-03-16T11:15:50.382Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:15:50.422Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:15:50.543Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:15:50.549Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T11:16:05.423Z] [INFO] [API] PATCH /api/user | {"status":200,"duration_ms":48}
+[2026-03-16T11:16:05.426Z] [INFO] | /api/user User profile updated successfully | {"targetEmail":"user1@gmail.com","updatedBy":"admin1@gmail.com"}
+[2026-03-16T11:16:05.490Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":29}
+[2026-03-16T11:16:05.491Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:16:11.902Z] [INFO] [API] PATCH /api/user | {"status":200,"duration_ms":30}
+[2026-03-16T11:16:11.903Z] [INFO] | /api/user User profile updated successfully | {"targetEmail":"user1@gmail.com","updatedBy":"admin1@gmail.com"}
+[2026-03-16T11:16:11.955Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":26}
+[2026-03-16T11:16:11.956Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:16:22.635Z] [INFO] [API] PATCH /api/user | {"status":200,"duration_ms":29}
+[2026-03-16T11:16:22.638Z] [INFO] | /api/user User profile updated successfully | {"targetEmail":"test2@gmail.com","updatedBy":"admin1@gmail.com"}
+[2026-03-16T11:16:22.697Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":30}
+[2026-03-16T11:16:22.700Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:16:37.006Z] [INFO] [API] PATCH /api/user | {"status":200,"duration_ms":30}
+[2026-03-16T11:16:37.009Z] [INFO] | /api/user User profile updated successfully | {"targetEmail":"test1@gmail.com","updatedBy":"admin1@gmail.com"}
+[2026-03-16T11:16:43.877Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-16T11:16:46.469Z] [INFO] | /dashboard/reports [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/reports"}
+[2026-03-16T11:16:47.230Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:16:47.433Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":28}
+[2026-03-16T11:16:47.435Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:17:11.572Z] [INFO] [API] PATCH /api/user | {"status":200,"duration_ms":35}
+[2026-03-16T11:17:11.576Z] [INFO] | /api/user User profile updated successfully | {"targetEmail":"sudhanshu1@gmail.com","updatedBy":"admin1@gmail.com"}
+[2026-03-16T11:17:13.896Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:17:14.189Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:17:14.199Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-16T11:17:15.887Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:17:16.020Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:17:16.025Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-16T11:17:17.794Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:17:18.574Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":27}
+[2026-03-16T11:17:18.577Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:17:30.159Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T11:17:30.931Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:17:31.081Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":26}
+[2026-03-16T11:17:31.083Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:17:34.196Z] [INFO] | /dashboard/reports [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/reports"}
+[2026-03-16T11:17:35.414Z] [INFO] | /dashboard/analytics [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/analytics"}
+[2026-03-16T11:17:36.212Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-16T11:22:36.522Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-16T11:22:36.651Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:22:36.660Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-16T11:22:37.717Z] [INFO] | /dashboard/reports [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/reports"}
+[2026-03-16T11:22:38.651Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:22:38.818Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":26}
+[2026-03-16T11:22:38.820Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:22:50.974Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:22:51.500Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":29}
+[2026-03-16T11:22:51.502Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:22:53.564Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:22:54.539Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":30}
+[2026-03-16T11:22:54.540Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:22:56.283Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:22:56.773Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":27}
+[2026-03-16T11:22:56.776Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:22:59.912Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:23:00.461Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":31}
+[2026-03-16T11:23:00.464Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:23:04.070Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:23:04.938Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":30}
+[2026-03-16T11:23:04.940Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:23:07.209Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T11:23:08.739Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:23:08.996Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":24}
+[2026-03-16T11:23:08.998Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:23:10.174Z] [INFO] | /dashboard/reports [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/reports"}
+[2026-03-16T11:23:12.095Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:23:12.242Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":24}
+[2026-03-16T11:23:12.244Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:23:13.816Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T11:23:14.920Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:23:15.186Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":29}
+[2026-03-16T11:23:15.189Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:23:16.101Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T11:24:12.144Z] [INFO] | /.well-known/appspecific/com.chrome.devtools.json [MIDDLEWARE] GET | {"url":"http://localhost:3000/.well-known/appspecific/com.chrome.devtools.json"}
+[2026-03-16T11:25:10.628Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":51}
+[2026-03-16T11:25:10.639Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:25:13.941Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":27}
+[2026-03-16T11:25:13.943Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:25:16.849Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":47}
+[2026-03-16T11:25:16.851Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:25:19.614Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":32}
+[2026-03-16T11:25:19.615Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:44:57.979Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":33}
+[2026-03-16T11:44:57.982Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-16T11:44:59.475Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:44:59.855Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-16T11:45:01.867Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T11:45:09.489Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-16T11:45:11.577Z] [INFO] | /logoipsum-418.png [MIDDLEWARE] GET | {"url":"http://localhost:3000/logoipsum-418.png"}

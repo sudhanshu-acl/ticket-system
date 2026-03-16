@@ -6,6 +6,51 @@ import { IncidentTicket, Status } from '../data/dummy'
 import { getTickets } from '../actions/tickets/getTicket'
 import TicketAnalyticsModal from '../components/TicketAnalyticsModal'
 
+const DashboardSkeleton = () => (
+  <div className="space-y-6">
+    {/* Stats Cards Skeleton */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {[...Array(4)].map((_, i) => (
+        <div key={i} className="bg-white rounded-lg shadow p-6 border-l-4 border-gray-200 animate-pulse">
+          <div className="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
+          <div className="h-8 bg-gray-200 rounded w-1/4"></div>
+        </div>
+      ))}
+    </div>
+
+    {/* Table Skeleton */}
+    <div className="bg-white rounded-lg shadow animate-pulse">
+      <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+        <div className="h-6 bg-gray-200 rounded w-32"></div>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="min-w-full">
+          <thead className="bg-gray-50 border-b border-gray-200">
+            <tr>
+              {[...Array(6)].map((_, i) => (
+                <th key={i} className="px-6 py-3 text-left">
+                  <div className="h-4 bg-gray-200 rounded w-20"></div>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            {[...Array(5)].map((_, rowIndex) => (
+              <tr key={rowIndex}>
+                {[...Array(6)].map((_, colIndex) => (
+                  <td key={colIndex} className="px-6 py-4">
+                    <div className="h-4 bg-gray-200 rounded w-24"></div>
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+)
+
 const DashboardPage = () => {
   const [tickets, setTickets] = useState<IncidentTicket[]>([])
   const [loading, setLoading] = useState(true)
@@ -86,9 +131,10 @@ const DashboardPage = () => {
       setIsSidebarOpen(false)
       setSelectedTicket(null)
       alert("Ticket updated successfully!"); // Or use the toast component if we had added it here
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
-      alert(error.message);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      alert(errorMessage);
     }
   }
 
@@ -123,11 +169,7 @@ const DashboardPage = () => {
   }
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-      </div>
-    )
+    return <DashboardSkeleton />
   }
 
   return (

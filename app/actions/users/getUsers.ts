@@ -1,4 +1,4 @@
-import logger from "@/app/lib/logger";
+
 
 export async function getUsers() {
     try {
@@ -6,7 +6,7 @@ export async function getUsers() {
         const data = await response.json();
         return data.data;
     } catch (error) {
-        logger.error(`[Error fetching users] Error fetching users ${error}`)
+        console.error(`[Error fetching users] Error fetching users`, error);
         return [];
     }
 }

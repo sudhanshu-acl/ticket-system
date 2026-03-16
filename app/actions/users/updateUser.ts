@@ -1,4 +1,4 @@
-import logger from "@/app/lib/logger";
+
 
 export async function updateUser(email: string, name: string, role: string, jobTitle: string) {
     try {
@@ -16,7 +16,7 @@ export async function updateUser(email: string, name: string, role: string, jobT
         }
         return data;
     } catch (error) {
-        logger.error(`[Error updating user] Error updating user ${error}`)
+        console.error(`[Error updating user] Error updating user`, error);
         throw error;
     }
 }

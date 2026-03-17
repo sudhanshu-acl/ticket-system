@@ -60,7 +60,23 @@ export async function GET(request: NextRequest) {
 
         const reportText = response.text || "Failed to generate report text.";
 
-        return NextResponse.json({ data: reportText });
+        // Save to local file system
+        const reportsDir = path.join(process.cwd(), 'app', 'data', 'reports');
+        if (!fs.existsSync(reportsDir)) {
+            fs.mkdirSync(reportsDir, { recursive: true });
+        }
+
+        const dateStr = new Date().toISOString().replace(/:/g, '-').split('.')[0];
+        const filename = `report-${dateStr}.md`;
+        const filePath = path.join(reportsDir, filename);
+
+        fs.writeFileSync(filePath, reportText, 'utf8');
+
+        return NextResponse.json({
+            data: reportText,
+            filename: filename,
+            createdAt: new Date().toISOString()
+        });
 
     } catch (error: any) {
         console.error('Error generating AI report:', error);

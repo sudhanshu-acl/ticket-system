@@ -1,0 +1,65 @@
+{
+  "analysis": "## ITSM and Incident Management Analysis Report (Monthly)\n\nThis report provides an analysis of ticketing system data for the selected month, focusing on volume, status, priority, and actionable recommendations.\n\n---\n\n### 1. Executive Summary\n\nThe ticketing system recorded a total of **10 tickets** for the month. This represents an extremely low overall volume, which could indicate a highly stable environment, a small user base, or potential issues with incident reporting/system utilization. Despite the low volume, a disproportionately high percentage of tickets are classified as High or Critical, signaling significant underlying issues or potential priority misclassification.\n\n---\n\n### 2. Status Analysis (Backlog Health)\n\n*   **Active vs. Processed:** There are 5 active tickets (4 Open, 1 In Progress) compared to 5 tickets that have been processed (3 Resolved, 2 Closed) within the reporting period.\n*   **Open vs. Resolved:** The number of Open tickets (4) exceeds Resolved tickets (3) for the month. While the overall numbers are small, this indicates a slight net increase in the active backlog, suggesting that tickets are not being resolved faster than they are being created.\n\n---\n\n### 3. Priority Analysis\n\n*   **High/Critical Volume:** A significant concern is the extremely high proportion of high-priority tickets. **80% of all tickets (8 out of 10)** are classified as either High (5 tickets) or Critical (3 tickets).\n*   **Implications:** This skew towards high severity suggests either:\n    *   Genuine, widespread critical issues impacting services.\n    *   A potential misclassification of priorities by users or support staff, inflating the perceived urgency.\n    *   A lack of clear priority definitions and/or training on their application.\n\n---\n\n### 4. Recommendations\n\nBased on this data, the support team should focus on the following key areas:\n\n1.  **Investigate Priority Skew:**\n    *   **Review Priority Definitions:** Immediately review and clarify the definitions for \"Critical\" and \"High\" priorities.\n    *   **Training & Enforcement:** Provide refresher training for both users and support staff on proper priority classification.\n    *   **Root Cause Analysis for High/Critical:** For genuinely high-priority incidents, initiate Root Cause Analysis (RCA) to identify and address underlying systemic issues that may be driving these frequent critical impacts.\n\n2.  **Backlog Management and Resolution Focus:**\n    *   **Prioritize Open High/Critical Tickets:** Given the high number of critical issues, immediate attention should be given to resolving the existing 4 Open and 1 In Progress tickets, particularly those classified as High or Critical.\n    *   **Improve Resolution Rate:** Aim to increase the number of Resolved tickets to exceed new Open tickets to actively reduce the backlog, even with low overall volume.\n\n3.  **Contextualize Ticket Volume:**\n    *   **Validate Expected Volume:** Confirm if the total ticket volume of 10 is normal for the reporting period and user base. If unexpectedly low, investigate potential reasons such as underreporting, alternative support channels, or issues with the ticketing system.",
+  "charts": {
+    "status": [
+      {
+        "name": "Open",
+        "value": 4
+      },
+      {
+        "name": "In Progress",
+        "value": 1
+      },
+      {
+        "name": "Resolved",
+        "value": 3
+      },
+      {
+        "name": "Closed",
+        "value": 2
+      }
+    ],
+    "priority": [
+      {
+        "name": "Low",
+        "value": 1
+      },
+      {
+        "name": "Medium",
+        "value": 1
+      },
+      {
+        "name": "High",
+        "value": 5
+      },
+      {
+        "name": "Critical",
+        "value": 3
+      }
+    ],
+    "trend": [
+      {
+        "date": "2026-03-02",
+        "tickets": 1
+      },
+      {
+        "date": "2026-03-03",
+        "tickets": 1
+      },
+      {
+        "date": "2026-03-04",
+        "tickets": 5
+      },
+      {
+        "date": "2026-03-11",
+        "tickets": 2
+      },
+      {
+        "date": "2026-03-16",
+        "tickets": 1
+      }
+    ]
+  },
+  "range": "month",
+  "createdAt": "2026-03-17T09:22:11.127Z"
+}

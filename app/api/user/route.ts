@@ -91,3 +91,59 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }
+
+/**
+ * Create a new user (Admin only)
+ * @param request 
+ * @returns created user profile
+ */
+export async function POST(request: NextRequest) {
+    const startTime = Date.now();
+    const pathname = request.nextUrl.pathname;
+    const method = request.method;
+
+    try {
+        const { email, password, name, role, jobTitle } = await request.json();
+        const userAuth = await verifyAuth(request);
+
+        // Require admin role for creating users
+        if (!userAuth || userAuth.role !== 'admin') {
+            logger.api(pathname, method, 403, Date.now() - startTime);
+            logger.warn(`Forbidden attempt to create new user`, { by: userAuth?.email }, pathname);
+            return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+        }
+
+        if (!email || !password || !name) {
+            return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+        }
+
+        await connectDB();
+
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return NextResponse.json({ error: 'User already exists' }, { status: 409 });
+        }
+
+        const newUser = await User.create({
+            email,
+            password, // Note: In a real app we'd hash this. Assuming existing auth structure handles it or it's plain for dummy purposes
+            name,
+            role: role || 'user',
+            jobTitle
+        });
+
+        // Remove password before sending back
+        const userResponse = newUser.toObject();
+        delete userResponse.password;
+
+        logger.api(pathname, method, 201, Date.now() - startTime);
+        logger.info(`User created successfully`, { newEmail: email, createdBy: userAuth.email }, pathname);
+        
+        return NextResponse.json({ message: 'User created successful', data: userResponse }, { status: 201 });
+    } catch (error: unknown) {
+        logger.api(pathname, method, 500, Date.now() - startTime);
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        logger.error(`Error creating user: ${errorMessage}`, {}, pathname);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    }
+}

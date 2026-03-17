@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import MarkdownVisualizer from '../../components/MarkdownVisualizer'
 
 export default function ReportsPage() {
     const [report, setReport] = useState<string | null>(null)
@@ -24,8 +25,9 @@ export default function ReportsPage() {
             }
 
             setReport(data.data)
-        } catch (err: any) {
-            setError(err.message)
+        } catch (err: unknown) {
+            const errorMessage = err instanceof Error ? err.message : String(err);
+            setError(errorMessage)
         } finally {
             setLoading(false)
         }
@@ -115,31 +117,7 @@ export default function ReportsPage() {
                             </button>
                         </div>
                     </div>
-                    <div className="p-6 prose prose-slate max-w-none prose-headings:font-semibold prose-a:text-blue-600">
-                        {/* Extremely simple markdown rendering fallback without heavy libraries */}
-                        {report.split('\n').map((line, i) => {
-                            if (line.startsWith('### ')) return <h3 key={i} className="text-lg font-bold mt-6 mb-3 text-slate-800">{line.replace('### ', '')}</h3>
-                            if (line.startsWith('## ')) return <h2 key={i} className="text-xl font-bold mt-8 mb-4 text-slate-900 border-b pb-2">{line.replace('## ', '')}</h2>
-                            if (line.startsWith('# ')) return <h1 key={i} className="text-2xl font-bold mt-4 mb-4 text-slate-900">{line.replace('# ', '')}</h1>
-                            if (line.startsWith('- ')) return <li key={i} className="ml-4 mb-1 text-slate-700">{line.replace('- ', '')}</li>
-                            if (line.startsWith('* ')) return <li key={i} className="ml-4 mb-1 text-slate-700">{line.replace('* ', '')}</li>
-                            if (line.match(/^\d+\.\s/)) return <li key={i} className="ml-4 mb-1 font-medium text-slate-800">{line}</li>
-                            if (line.trim() === '') return <br key={i} />
-
-                            // Handle bolding
-                            let formattedLine = line;
-                            const boldRegex = /\*\*(.*?)\*\*/g;
-                            if (boldRegex.test(formattedLine)) {
-                                const parts = formattedLine.split(boldRegex);
-                                return (
-                                    <p key={i} className="mb-3 text-slate-700 leading-relaxed">
-                                        {parts.map((part, index) => index % 2 === 1 ? <strong key={index} className="text-slate-900">{part}</strong> : part)}
-                                    </p>
-                                );
-                            }
-                            return <p key={i} className="mb-3 text-slate-700 leading-relaxed">{line}</p>
-                        })}
-                    </div>
+                    <MarkdownVisualizer content={report} className="p-6 prose-slate max-w-none" />
                 </div>
             )}
 
@@ -150,7 +128,7 @@ export default function ReportsPage() {
                     </div>
                     <h3 className="text-lg font-semibold text-slate-900 mb-2">No Report Generated Yet</h3>
                     <p className="text-slate-500 max-w-md mx-auto">
-                        Click the "Generate AI Log Report" button above to have our AI analyze the recent system logs, identify errors, and suggest fixes.
+                        Click the &quot;Generate AI Log Report&quot; button above to have our AI analyze the recent system logs, identify errors, and suggest fixes.
                     </p>
                 </div>
             )}

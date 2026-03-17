@@ -3,6 +3,8 @@ import { verifyAuth } from '@/app/lib/auth';
 import { connectDB } from '@/app/lib/mongodb';
 import Ticket from '@/app/models/ticket';
 import { GoogleGenAI } from '@google/genai';
+import fs from 'fs';
+import path from 'path';
 
 const ai = new GoogleGenAI({});
 
@@ -94,19 +96,37 @@ export async function GET(request: NextRequest) {
 
         const reportText = response.text || "Failed to generate text analysis.";
 
+        const responseData = {
+            analysis: reportText,
+            charts: {
+                status: statusData,
+                priority: priorityData,
+                trend: trendData
+            },
+            range,
+            createdAt: new Date().toISOString()
+        };
+
+        // Save to local file system
+        const analyticsDir = path.join(process.cwd(), 'app', 'data', 'analytics');
+        if (!fs.existsSync(analyticsDir)) {
+            fs.mkdirSync(analyticsDir, { recursive: true });
+        }
+
+        const dateStr = new Date().toISOString().replace(/:/g, '-').split('.')[0];
+        const filename = `analytics-${range}-${dateStr}.json`;
+        const filePath = path.join(analyticsDir, filename);
+        
+        fs.writeFileSync(filePath, JSON.stringify(responseData, null, 2), 'utf8');
+
         return NextResponse.json({
-            data: {
-                analysis: reportText,
-                charts: {
-                    status: statusData,
-                    priority: priorityData,
-                    trend: trendData
-                }
-            }
+            data: responseData,
+            filename: filename
         });
 
-    } catch (error: any) {
+    } catch (error: unknown) {
+        const errorMessage = error instanceof Error ? error.message : String(error);
         console.error('Error generating AI ticket report:', error);
-        return NextResponse.json({ error: error?.message || 'Failed to generate report.' }, { status: 500 });
+        return NextResponse.json({ error: errorMessage || 'Failed to generate report.' }, { status: 500 });
     }
 }

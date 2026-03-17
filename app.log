@@ -429,3 +429,77 @@
 [2026-03-16T11:45:01.867Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
 [2026-03-16T11:45:09.489Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
 [2026-03-16T11:45:11.577Z] [INFO] | /logoipsum-418.png [MIDDLEWARE] GET | {"url":"http://localhost:3000/logoipsum-418.png"}
+[2026-03-16T12:09:15.323Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-16T12:09:15.336Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-16T12:09:16.289Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-16T12:09:16.306Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-16T12:09:16.787Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-16T12:09:16.804Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-16T12:09:16.811Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-16T12:09:16.826Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-16T12:09:17.723Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-16T12:09:17.729Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-16T12:09:17.750Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-16T12:09:17.764Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-16T12:09:19.146Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-16T12:09:19.175Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-16T12:09:19.185Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-16T12:09:19.190Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-16T12:09:19.872Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-16T12:09:19.876Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-16T12:09:19.879Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-16T12:09:19.885Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-16T12:09:19.888Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-16T12:11:41.364Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-16T12:11:41.379Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-16T12:13:19.417Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-16T12:13:19.428Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-17T04:58:58.795Z] [INFO] | /logoipsum-418.png [MIDDLEWARE] GET | {"url":"http://localhost:3000/logoipsum-418.png"}
+[2026-03-17T05:01:30.707Z] [INFO] | /dashboard/analytics [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/analytics"}
+[2026-03-17T05:01:37.232Z] [INFO] | /dashboard/reports [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/reports"}
+[2026-03-17T05:01:39.513Z] [INFO] | /dashboard/reports [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/reports"}
+[2026-03-17T05:01:39.643Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-17T05:01:39.648Z] [INFO] | /dashboard/reports [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/reports"}
+[2026-03-17T05:01:40.973Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-17T05:01:42.018Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":304}
+[2026-03-17T05:01:42.020Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-17T05:01:42.060Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-17T05:01:43.589Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-17T05:01:43.872Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":24}
+[2026-03-17T05:01:43.874Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-17T05:01:45.550Z] [INFO] | /dashboard/reports [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/reports"}
+[2026-03-17T05:01:47.322Z] [INFO] | /dashboard/analytics [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/analytics"}
+[2026-03-17T05:01:48.676Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-17T05:02:02.465Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-17T05:04:24.339Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-17T05:06:41.862Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-17T05:06:41.870Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-17T05:06:42.189Z] [INFO] | /dashboard/settings [MIDDLEWARE] POST | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-17T05:07:19.296Z] [INFO] | /dashboard/settings [MIDDLEWARE] POST | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-17T05:10:52.483Z] [INFO] | /dashboard/settings [MIDDLEWARE] POST | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-17T05:10:53.739Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-17T05:10:53.989Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":30}
+[2026-03-17T05:10:53.991Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-17T05:11:23.914Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-17T05:11:26.138Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-17T05:11:26.314Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":39}
+[2026-03-17T05:11:26.317Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-17T05:11:33.726Z] [INFO] | /dashboard/reports [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/reports"}
+[2026-03-17T05:11:36.744Z] [INFO] | /dashboard/analytics [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/analytics"}
+[2026-03-17T05:11:38.471Z] [INFO] | /dashboard/reports [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/reports"}
+[2026-03-17T05:17:20.157Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-17T05:17:20.292Z] [INFO] | /dashboard/settings [MIDDLEWARE] POST | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-17T05:18:20.600Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-17T05:18:20.724Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-17T05:18:22.282Z] [INFO] | /dashboard/analytics [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/analytics"}
+[2026-03-17T05:18:23.903Z] [INFO] | /dashboard/reports [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/reports"}
+[2026-03-17T05:18:28.476Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-17T05:18:28.620Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":27}
+[2026-03-17T05:18:28.622Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-17T05:18:30.897Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-17T05:18:43.267Z] [INFO] | /dashboard/analytics [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/analytics"}
+[2026-03-17T05:18:57.657Z] [INFO] | /dashboard/reports [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/reports"}
+[2026-03-17T05:18:59.055Z] [INFO] | /dashboard/analytics [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/analytics"}
+[2026-03-17T05:19:00.720Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-17T05:19:00.879Z] [INFO] | /dashboard/settings [MIDDLEWARE] POST | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-17T05:19:22.465Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}

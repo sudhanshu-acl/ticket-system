@@ -4,7 +4,9 @@ import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getUsers } from '../actions/users/getUsers';
 import { updateUser } from '../actions/users/updateUser';
+import { createUser } from '../actions/users/createUser';
 import EditUserModal from './EditUserModal';
+import AddUserModal from './AddUserModal';
 
 interface User {
   _id: string;
@@ -44,6 +46,7 @@ const TableSkeleton = () => (
 const UserListing = () => {
     const queryClient = useQueryClient();
     const [editingUser, setEditingUser] = useState<User | null>(null);
+    const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
     const { data: usersData, isLoading, error } = useQuery({
         queryKey: ['users'],
@@ -65,6 +68,18 @@ const UserListing = () => {
         await updateMutation.mutateAsync(data);
     };
 
+    const createMutation = useMutation({
+        mutationFn: (data: { email: string; name: string; role: string; jobTitle: string }) => 
+            createUser(data.email, data.name, data.role, data.jobTitle),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['users'] });
+        }
+    });
+
+    const handleCreateSubmit = async (data: { email: string; name: string; role: string; jobTitle: string }) => {
+        await createMutation.mutateAsync(data);
+    };
+
     if (isLoading) {
         return <TableSkeleton />;
     }
@@ -76,9 +91,22 @@ const UserListing = () => {
     const users: User[] = usersData || [];
 
     return (
-        <div className="overflow-x-auto bg-white rounded-lg shadow mt-6">
-            <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+        <div className="space-y-4">
+            <div className="flex justify-end">
+                <button
+                    onClick={() => setIsAddModalOpen(true)}
+                    className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors shadow-sm flex items-center gap-2"
+                >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                    </svg>
+                    Add User
+                </button>
+            </div>
+
+            <div className="overflow-x-auto bg-white rounded-lg shadow">
+                <table className="min-w-full divide-y divide-gray-200">
+                    <thead className="bg-gray-50">
                     <tr>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
@@ -117,12 +145,19 @@ const UserListing = () => {
                     )}
                 </tbody>
             </table>
+            </div>
 
             <EditUserModal 
                 isOpen={!!editingUser} 
                 onClose={() => setEditingUser(null)} 
                 onSubmit={handleEditSubmit} 
                 user={editingUser} 
+            />
+
+            <AddUserModal
+                isOpen={isAddModalOpen}
+                onClose={() => setIsAddModalOpen(false)}
+                onSubmit={handleCreateSubmit}
             />
         </div>
     );

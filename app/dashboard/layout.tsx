@@ -2,6 +2,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import Sidebar from '@/app/components/Sidebar'
 import { User } from '@/app/utils/type'
 
@@ -15,6 +16,7 @@ export default function DashboardLayout({
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     // Get user from localStorage
@@ -22,13 +24,14 @@ export default function DashboardLayout({
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser)
       setUser(parsedUser)
-      // Redirect to home if user is 'user'
+      // Redirect to unauthorized if user is 'user'
       if (parsedUser.role === 'user') {
-        window.location.href = '/'
+        router.push('/unauthorized')
+        return
       }
     } else {
       // Redirect to login if no user
-      window.location.href = '/login'
+      router.push('/login')
     }
     setLoading(false)
   }, [])

@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
   await connectDB();
 
   // fetch tickets from db here
-  const tickets = await Ticket.find().sort({ createdAt: -1 }).limit(20);
+  const tickets = await Ticket.find({ "reportedBy.email": user.email}).sort({ createdAt: -1 }).limit(20);
 
   return NextResponse.json({ message: 'Ticket fetched successful', data: tickets });
 }

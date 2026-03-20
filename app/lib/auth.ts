@@ -9,7 +9,7 @@ export const verifyAuth = async (request: NextRequest) => {
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET || 'change-me') as any;
         await connectDB();
-        const user = await User.findById(decoded.userId);
+        const user = await User.findById(decoded.userId).select('-password');
         return user;
     } catch (err) {
         return null;

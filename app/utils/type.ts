@@ -2,7 +2,7 @@ export type pagePropsChildNode = {
     children: React.ReactNode;
 }
 
-export type UserRole = 'admin' | 'user' | 'support';
+export type UserRole = 'admin' | 'user' | 'support' | 'manager';
 
 export interface BlogPost {
     userId?: number;

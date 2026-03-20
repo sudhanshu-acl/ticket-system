@@ -89,8 +89,10 @@ export default function EditUserModal({ isOpen, onClose, onSubmit, user }: EditU
               onChange={(e) => setRole(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 bg-white"
             >
-              <option value="user">user</option>
-              <option value="admin">admin</option>
+              <option value="user">User</option>
+              <option value="support">Support</option>
+              <option value="manager">Manager</option>
+              <option value="admin">Admin</option>
             </select>
           </div>
 

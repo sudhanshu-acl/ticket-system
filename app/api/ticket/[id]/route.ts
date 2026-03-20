@@ -2,17 +2,18 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { connectDB } from '@/app/lib/mongodb';
 import Ticket from '@/app/models/ticket';
-import User from '@/app/models/user';
 import { verifyAuth } from '@/app/lib/auth';
+import { requirePermission } from '@/app/lib/permissions';
 
 export async function PUT(
     request: NextRequest,
     { params }: { params: Promise<{ id: string }> }
 ) {
     const user = await verifyAuth(request);
-    if (!user || user.role !== 'admin') {
-        return NextResponse.json({ error: 'Unauthorized. Admin access required.' }, { status: 401 });
+    if (!user) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
+    requirePermission(user.role, 'manager');
 
     const { status, resolvedBy } = await request.json();
     console.log("status ", status, resolvedBy);

@@ -3,6 +3,7 @@ import { verifyAuth } from '@/app/lib/auth';
 import { connectDB } from '@/app/lib/mongodb';
 import Ticket from '@/app/models/ticket';
 import { GoogleGenAI } from '@google/genai';
+import { requirePermission } from '@/app/lib/permissions';
 import fs from 'fs';
 import path from 'path';
 
@@ -10,10 +11,10 @@ const ai = new GoogleGenAI({});
 
 export async function GET(request: NextRequest) {
     const user = await verifyAuth(request);
-
-    if (!user || user.role !== 'admin') {
-        return NextResponse.json({ error: 'Unauthorized. Admin access required.' }, { status: 401 });
+    if (!user) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
+    requirePermission(user.role, 'manager');
 
     // Determine the time grouping requested by the client (e.g. ?range=month)
     const { searchParams } = new URL(request.url);

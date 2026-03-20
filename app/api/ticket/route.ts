@@ -2,14 +2,15 @@
 import { NextResponse, NextRequest } from 'next/server';
 import { connectDB } from '@/app/lib/mongodb';
 import Ticket from '@/app/models/ticket';
-import User from '@/app/models/user';
 import { verifyAuth } from '@/app/lib/auth';
+import { requirePermission } from '@/app/lib/permissions';
 
 export async function POST(request: NextRequest) {
   const user = await verifyAuth(request);
   if (!user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
+  requirePermission(user.role, 'user');
 
   const { title, category, priority, status, reportedBy, createdAt } = await request.json();
   await connectDB();
@@ -31,11 +32,18 @@ export async function GET(request: NextRequest) {
   if (!user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
+  requirePermission(user.role, 'user');
 
   await connectDB();
 
+  let query = {};
+  if (['user', 'support'].includes(user.role)) {
+    query = { "reportedBy.email": user.email };
+  }
+  // manager and admin see all tickets
+
   // fetch tickets from db here
-  const tickets = await Ticket.find({ "reportedBy.email": user.email}).sort({ createdAt: -1 }).limit(20);
+  const tickets = await Ticket.find(query).sort({ createdAt: -1 }).limit(20);
 
   return NextResponse.json({ message: 'Ticket fetched successful', data: tickets });
 }

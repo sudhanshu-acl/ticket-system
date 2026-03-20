@@ -846,3 +846,107 @@
 [2026-03-20T07:10:38.344Z] [DEBUG] [LOGIN] JWT token generated | {"email":"user5@gmail.com"}
 [2026-03-20T07:10:38.346Z] [INFO] [AUTH] LOGIN succeeded | {"email":"user5@gmail.com"}
 [2026-03-20T07:14:05.120Z] [INFO] | /ticket [MIDDLEWARE] GET | {"url":"http://localhost:3000/ticket"}
+[2026-03-20T07:15:33.999Z] [INFO] | /ticket [MIDDLEWARE] GET | {"url":"http://localhost:3000/ticket"}
+[2026-03-20T07:15:35.396Z] [INFO] | /blog [MIDDLEWARE] GET | {"url":"http://localhost:3000/blog"}
+[2026-03-20T07:15:38.476Z] [INFO] | /about [MIDDLEWARE] GET | {"url":"http://localhost:3000/about"}
+[2026-03-20T07:15:38.681Z] [INFO] | /ticket-system.png [MIDDLEWARE] GET | {"url":"http://localhost:3000/ticket-system.png"}
+[2026-03-20T07:15:41.456Z] [INFO] | /contact [MIDDLEWARE] GET | {"url":"http://localhost:3000/contact"}
+[2026-03-20T07:15:43.336Z] [INFO] | / [MIDDLEWARE] GET | {"url":"http://localhost:3000/"}
+[2026-03-20T07:16:16.293Z] [INFO] | /blog [MIDDLEWARE] GET | {"url":"http://localhost:3000/blog"}
+[2026-03-20T07:16:17.874Z] [INFO] | /about [MIDDLEWARE] GET | {"url":"http://localhost:3000/about"}
+[2026-03-20T07:16:19.041Z] [INFO] | /contact [MIDDLEWARE] GET | {"url":"http://localhost:3000/contact"}
+[2026-03-20T07:16:28.750Z] [INFO] | / [MIDDLEWARE] GET | {"url":"http://localhost:3000/"}
+[2026-03-20T07:16:31.403Z] [INFO] | /ticket [MIDDLEWARE] GET | {"url":"http://localhost:3000/ticket"}
+[2026-03-20T07:16:51.122Z] [INFO] | /about [MIDDLEWARE] GET | {"url":"http://localhost:3000/about"}
+[2026-03-20T07:16:52.046Z] [INFO] | /contact [MIDDLEWARE] GET | {"url":"http://localhost:3000/contact"}
+[2026-03-20T07:16:53.465Z] [INFO] [LOGOUT] Logout attempt
+[2026-03-20T07:16:53.484Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-20T07:16:53.615Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-20T07:17:02.978Z] [INFO] [LOGIN] Login attempt | {"email":"admin1@gmail.com"}
+[2026-03-20T07:17:02.979Z] [DEBUG] [LOGIN] Connected to database | {"email":"admin1@gmail.com"}
+[2026-03-20T07:17:03.162Z] [DEBUG] [LOGIN] JWT token generated | {"email":"admin1@gmail.com"}
+[2026-03-20T07:17:03.167Z] [INFO] [AUTH] LOGIN succeeded | {"email":"admin1@gmail.com"}
+[2026-03-20T07:17:03.910Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:17:07.794Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:17:07.901Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:21:02.866Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-20T07:21:03.648Z] [INFO] | /dashboard/settings [MIDDLEWARE] POST | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-20T07:21:04.063Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-20T07:21:04.546Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-20T07:21:04.556Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:21:06.245Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-20T07:21:06.682Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:21:06.687Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-20T07:21:07.385Z] [INFO] | /dashboard/analytics [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/analytics"}
+[2026-03-20T07:21:08.954Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-20T07:21:11.942Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-20T07:21:15.311Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-20T07:21:31.899Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-20T07:21:44.343Z] [INFO] | / [MIDDLEWARE] GET | {"url":"http://localhost:3000/"}
+[2026-03-20T07:21:45.981Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:21:46.434Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:21:46.885Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:22:34.757Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:23:08.470Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:23:27.883Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:23:28.301Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:23:28.820Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-20T07:23:29.857Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":42}
+[2026-03-20T07:23:29.860Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-20T07:23:30.357Z] [INFO] | /dashboard/reports [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/reports"}
+[2026-03-20T07:23:32.893Z] [INFO] | /dashboard/analytics [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/analytics"}
+[2026-03-20T07:23:34.673Z] [INFO] | /dashboard/settings [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-20T07:23:35.233Z] [INFO] | /dashboard/settings [MIDDLEWARE] POST | {"url":"http://localhost:3000/dashboard/settings"}
+[2026-03-20T07:23:37.186Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:24:03.024Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:24:03.108Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:24:03.990Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-20T07:24:04.790Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":32}
+[2026-03-20T07:24:04.792Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-20T07:24:30.039Z] [INFO] [API] PATCH /api/user | {"status":200,"duration_ms":62}
+[2026-03-20T07:24:30.041Z] [INFO] | /api/user User profile updated successfully | {"targetEmail":"sudhanshu1@gmail.com","updatedBy":"admin1@gmail.com"}
+[2026-03-20T07:24:32.685Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-20T07:24:33.809Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":68}
+[2026-03-20T07:24:33.812Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-20T07:24:53.724Z] [INFO] [API] PATCH /api/user | {"status":200,"duration_ms":36}
+[2026-03-20T07:24:53.727Z] [INFO] | /api/user User profile updated successfully | {"targetEmail":"user3@gmail.com","updatedBy":"admin1@gmail.com"}
+[2026-03-20T07:24:57.284Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-20T07:24:58.199Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":33}
+[2026-03-20T07:24:58.201Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-20T07:25:22.507Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:25:36.050Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:25:36.146Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:25:36.150Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-20T07:25:37.117Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-20T07:25:37.330Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":66}
+[2026-03-20T07:25:37.331Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-20T07:25:38.078Z] [INFO] | /dashboard/reports [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/reports"}
+[2026-03-20T07:25:39.006Z] [INFO] | /dashboard/analytics [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/analytics"}
+[2026-03-20T07:25:40.379Z] [INFO] | /dashboard/reports [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/reports"}
+[2026-03-20T07:25:48.855Z] [INFO] | /dashboard/analytics [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/analytics"}
+[2026-03-20T07:26:07.781Z] [INFO] | /dashboard/users [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/users"}
+[2026-03-20T07:26:08.055Z] [INFO] [API] GET /api/user | {"status":200,"duration_ms":40}
+[2026-03-20T07:26:08.057Z] [INFO] | /api/user Successfully fetched users list | {"count":8,"by":"admin1@gmail.com"}
+[2026-03-20T07:26:12.795Z] [INFO] | /login [MIDDLEWARE] GET | {"url":"http://localhost:3000/login"}
+[2026-03-20T07:26:21.955Z] [INFO] [LOGIN] Login attempt | {"email":"user3@gmail.com"}
+[2026-03-20T07:26:21.958Z] [DEBUG] [LOGIN] Connected to database | {"email":"user3@gmail.com"}
+[2026-03-20T07:26:22.182Z] [DEBUG] [LOGIN] JWT token generated | {"email":"user3@gmail.com"}
+[2026-03-20T07:26:22.187Z] [INFO] [AUTH] LOGIN succeeded | {"email":"user3@gmail.com"}
+[2026-03-20T07:26:22.924Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:26:29.421Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:26:29.528Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:26:30.893Z] [INFO] | /dashboard/queue [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/queue"}
+[2026-03-20T07:26:31.013Z] [INFO] | /dashboard/queue [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/queue"}
+[2026-03-20T07:26:33.429Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:26:35.607Z] [INFO] | /dashboard/reports [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/reports"}
+[2026-03-20T07:26:37.191Z] [INFO] | /dashboard/analytics [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/analytics"}
+[2026-03-20T07:26:40.199Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}
+[2026-03-20T07:26:43.654Z] [INFO] | /dashboard/analytics [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/analytics"}
+[2026-03-20T07:26:45.845Z] [INFO] | /dashboard/reports [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/reports"}
+[2026-03-20T07:26:57.351Z] [INFO] | /dashboard/analytics [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/analytics"}
+[2026-03-20T07:27:00.837Z] [INFO] | /dashboard/analytics [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/analytics"}
+[2026-03-20T07:27:06.731Z] [INFO] | /.well-known/appspecific/com.chrome.devtools.json [MIDDLEWARE] GET | {"url":"http://localhost:3000/.well-known/appspecific/com.chrome.devtools.json"}
+[2026-03-20T07:27:24.713Z] [INFO] | /dashboard/queue [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/queue"}
+[2026-03-20T07:27:24.792Z] [INFO] | /dashboard/queue [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/queue"}
+[2026-03-20T07:27:27.413Z] [INFO] | /dashboard/analytics [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard/analytics"}
+[2026-03-20T07:27:29.276Z] [INFO] | /dashboard [MIDDLEWARE] GET | {"url":"http://localhost:3000/dashboard"}

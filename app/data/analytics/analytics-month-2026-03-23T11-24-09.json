@@ -1,0 +1,65 @@
+{
+  "analysis": "## ITSM & Incident Management Report - Monthly Overview\n\nThis report provides an analysis of ticketing system data for the selected month, highlighting key trends and areas for immediate attention.\n\n### 1. Executive Summary\n\nThe overall ticket volume for the month is exceptionally low, with only 10 tickets recorded. However, the *nature* of these tickets is highly concerning. A dominant majority (80%) of the tickets are classified as High or Critical priority, indicating a significant concentration of severe incidents that demand urgent attention and investigation.\n\n### 2. Status Analysis (Backlog Health)\n\n*   **Total Tickets:** 10\n*   **Active Tickets (Open & In Progress):** 5 (50%)\n*   **Completed Tickets (Resolved & Closed):** 5 (50%)\n\nThe backlog shows 50% of tickets still in an active state. While the completed count matches the active count, the presence of 5 active tickets, especially given the high proportion of High/Critical priorities (8 out of 10 total), suggests that critical incidents are currently unresolved and could be impacting business operations. This represents a substantial portion of the total monthly volume remaining open.\n\n### 3. Priority Analysis\n\n*   **High Priority Tickets:** 5 (50% of total)\n*   **Critical Priority Tickets:** 3 (30% of total)\n*   **Total High/Critical:** 8 (80% of total)\n\nThe priority breakdown is a major area of concern. A staggering 80% of all recorded tickets are categorized as either High or Critical. This indicates either a severe period of system instability, a high frequency of critical business impacting events, or potential inconsistencies in priority classification. This concentration of high-severity incidents needs immediate investigation and resolution.\n\n### 4. Recommendations\n\nBased on the provided data, the support team should focus on the following key areas:\n\n*   **Immediate Resolution of High/Critical Incidents:** Prioritize and expedite the resolution of the 8 High and Critical tickets currently impacting operations.\n*   **Investigate Priority Distribution:** Conduct a deep dive into why 80% of tickets are classified as High or Critical. This includes:\n    *   Verifying the accuracy of priority assignments.\n    *   Assessing if the priority matrix is being consistently applied.\n    *   Identifying common themes or root causes behind these high-severity incidents.\n*   **Problem Management Initiation:** For recurring or systemic High/Critical issues, initiate Problem Management processes to identify underlying root causes and implement permanent solutions to prevent recurrence.\n*   **Data Scope Clarification:** Given the extremely low total ticket count for a month, confirm if this data represents all incidents or a specific subset (e.g., only major incidents). If it represents all incidents, further investigation into the overall low volume is warranted.\n*   **Spike Analysis:** Review the incident spike on March 4th (5 tickets created) in conjunction with their priorities to understand any specific event or change that may have triggered multiple high-priority incidents.",
+  "charts": {
+    "status": [
+      {
+        "name": "Open",
+        "value": 2
+      },
+      {
+        "name": "In Progress",
+        "value": 3
+      },
+      {
+        "name": "Resolved",
+        "value": 3
+      },
+      {
+        "name": "Closed",
+        "value": 2
+      }
+    ],
+    "priority": [
+      {
+        "name": "Low",
+        "value": 1
+      },
+      {
+        "name": "Medium",
+        "value": 1
+      },
+      {
+        "name": "High",
+        "value": 5
+      },
+      {
+        "name": "Critical",
+        "value": 3
+      }
+    ],
+    "trend": [
+      {
+        "date": "2026-03-02",
+        "tickets": 1
+      },
+      {
+        "date": "2026-03-03",
+        "tickets": 1
+      },
+      {
+        "date": "2026-03-04",
+        "tickets": 5
+      },
+      {
+        "date": "2026-03-11",
+        "tickets": 2
+      },
+      {
+        "date": "2026-03-16",
+        "tickets": 1
+      }
+    ]
+  },
+  "range": "month",
+  "createdAt": "2026-03-23T11:24:09.574Z"
+}

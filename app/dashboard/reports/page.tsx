@@ -2,7 +2,7 @@
 
 
 import { useState, useEffect } from 'react'
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import MarkdownVisualizer from '../../components/MarkdownVisualizer'
 
 interface SavedReport {
@@ -16,6 +16,7 @@ export default function ReportsPage() {
     const [selectedFilename, setSelectedFilename] = useState<string | null>(null)
     const [reportContent, setReportContent] = useState<string | null>(null)
     const [isLoadingContent, setIsLoadingContent] = useState(false)
+    const [isStreaming, setIsStreaming] = useState(false)
     const [contentError, setContentError] = useState<string | null>(null)
 
     // Fetch list of saved reports
@@ -37,7 +38,6 @@ export default function ReportsPage() {
         if (listError) console.error('[UI-Logs] List Fetch Error:', listError);
     }, [listError]);
 
-    console.log('Saved Reports List:', savedReports);
 
     // Fetch single report content when selected
     useEffect(() => {
@@ -65,23 +65,65 @@ export default function ReportsPage() {
         fetchContent();
     }, [selectedFilename]);
 
-    // Generate new report mutation
-    const generateMutation = useMutation({
-        mutationFn: async () => {
-            const res = await fetch('/api/reports/analyze', { method: 'GET' });
-            const data = await res.json();
-            if (!res.ok) throw new Error(data.error || 'Failed to generate report');
-            return data;
-        },
-        onSuccess: (data) => {
-            queryClient.invalidateQueries({ queryKey: ['savedReports'] });
-            setSelectedFilename(data.filename);
-            setReportContent(data.data);
-        }
-    });
-
     const handleGenerateReport = async () => {
-        generateMutation.mutate();
+        setIsStreaming(true);
+        setContentError(null);
+        setReportContent(null);
+        setSelectedFilename(null);
+
+        try {
+            const res = await fetch('/api/reports/analyze', { method: 'GET' });
+
+            if (!res.ok) {
+                const data = await res.json().catch(() => ({}));
+                throw new Error(data.error || 'Failed to generate report');
+            }
+
+            const reader = res.body?.getReader();
+            if (!reader) throw new Error('Response body is not streamable');
+
+            const decoder = new TextDecoder();
+            let done = false;
+            let buffer = '';
+            let newFilename = '';
+
+            while (!done) {
+                const { value, done: doneReading } = await reader.read();
+                done = doneReading;
+
+                if (value) {
+                    buffer += decoder.decode(value, { stream: true });
+                    const lines = buffer.split('\n');
+                    buffer = lines.pop() || '';
+
+                    for (const line of lines) {
+                        if (!line.trim()) continue;
+                        try {
+                            const data = JSON.parse(line);
+                            if (data.type === 'metadata') {
+                                setReportContent(''); // Reset on start
+                                newFilename = data.filename;
+                            } else if (data.type === 'text') {
+                                setReportContent((prev) => (prev || '') + data.chunk);
+                            } else if (data.type === 'error') {
+                                throw new Error(data.error);
+                            }
+                        } catch (parseError) {
+                            console.error("Failed to parse stream line", line, parseError);
+                        }
+                    }
+                }
+            }
+            if (newFilename) {
+                setSelectedFilename(newFilename);
+                queryClient.invalidateQueries({ queryKey: ['savedReports'] });
+            }
+        } catch (err: unknown) {
+            const errorMessage = err instanceof Error ? err.message : String(err);
+            setContentError(errorMessage);
+        } finally {
+            setIsStreaming(false);
+        }
     }
 
     const handleDownload = () => {
@@ -113,10 +155,10 @@ export default function ReportsPage() {
 
                 <button
                     onClick={handleGenerateReport}
-                    disabled={generateMutation.isPending}
+                    disabled={isStreaming}
                     className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-sm whitespace-nowrap"
                 >
-                    {generateMutation.isPending ? (
+                    {isStreaming ? (
                         <>
                             <div className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
                             Analyzing Logs...
@@ -129,12 +171,7 @@ export default function ReportsPage() {
                 </button>
             </div>
 
-            {generateMutation.error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg">
-                    <p className="font-semibold">Error Generating Report</p>
-                    <p>{generateMutation.error.message}</p>
-                </div>
-            )}
+
 
             <div className="flex flex-col lg:flex-row gap-6">
                 {/* Sidebar: History */}
@@ -182,7 +219,7 @@ export default function ReportsPage() {
 
                 {/* Main Content Area */}
                 <div className="flex-1 min-w-0">
-                    {(isLoadingContent || generateMutation.isPending) && (
+                    {(isLoadingContent || isStreaming) && !reportContent && (
                         <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden animate-pulse">
                             <div className="bg-slate-200 h-14 w-full"></div>
                             <div className="p-6 space-y-6">
@@ -208,7 +245,7 @@ export default function ReportsPage() {
                         </div>
                     )}
 
-                    {reportContent && !isLoadingContent && !generateMutation.isPending && (
+                    {reportContent && !isLoadingContent && (
                         <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                             <div className="bg-slate-900 text-white px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                                 <h2 className="font-semibold text-lg flex items-center gap-2">
@@ -216,8 +253,9 @@ export default function ReportsPage() {
                                 </h2>
                                 <div className="flex items-center gap-3 w-full sm:w-auto overflow-hidden">
                                     <span className="text-xs bg-slate-800 px-2 py-1 rounded text-slate-300 truncate max-w-[150px] sm:max-w-none">
-                                        {selectedFilename}
+                                        {selectedFilename || 'Generating...'}
                                     </span>
+                                    {isStreaming && <span className="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded animate-pulse border border-blue-500/30">Streaming...</span>}
                                     <button
                                         onClick={handleDownload}
                                         className="p-1.5 hover:bg-slate-700 rounded transition-colors ml-auto sm:ml-0 shrink-0"
@@ -233,7 +271,7 @@ export default function ReportsPage() {
                         </div>
                     )}
 
-                    {!reportContent && !isLoadingContent && !generateMutation.isPending && !contentError && (
+                    {!reportContent && !isLoadingContent && !isStreaming && !contentError && (
                         <div className="bg-white rounded-xl shadow-sm border border-gray-200 border-dashed p-12 text-center h-full flex flex-col items-center justify-center">
                             <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
                                 📊

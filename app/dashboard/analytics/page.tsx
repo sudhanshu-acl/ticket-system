@@ -21,8 +21,10 @@ const COLORS = ['#3b82f6', '#8b5cf6', '#10b981', '#64748b'] // Open, In Progress
 const PRIORITY_COLORS = ['#22c55e', '#eab308', '#f97316', '#ef4444'] // Low, Medium, High, Critical
 
 export default function AnalyticsPage() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [reportData, setReportData] = useState<any>(null)
     const [loading, setLoading] = useState(false)
+    const [isStreaming, setIsStreaming] = useState(false)
     const [error, setError] = useState<string | null>(null)
     const [timeRange, setTimeRange] = useState('month')
 
@@ -30,22 +32,71 @@ export default function AnalyticsPage() {
         setLoading(true)
         setError(null)
         setReportData(null)
+        setIsStreaming(true)
 
         try {
             const res = await fetch(`/api/reports/tickets?range=${timeRange}`, {
                 method: 'GET',
             })
 
-            const data = await res.json()
-
             if (!res.ok) {
+                const data = await res.json().catch(() => ({}));
                 throw new Error(data.error || 'Failed to generate report')
             }
 
-            setReportData(data.data) // Contains .analysis and .charts
-        } catch (err: any) {
+            const reader = res.body?.getReader();
+
+            console.log("reader", reader);
+
+            if (!reader) throw new Error('Response body is not streamable');
+
+            const decoder = new TextDecoder();
+            let done = false;
+            let buffer = '';
+
+            while (!done) {
+                const { value, done: doneReading } = await reader.read();
+                done = doneReading;
+
+                if (value) {
+                    buffer += decoder.decode(value, { stream: true });
+                    const lines = buffer.split('\n');
+                    buffer = lines.pop() || '';
+
+                    for (const line of lines) {
+                        if (!line.trim()) continue;
+                        try {
+                            const data = JSON.parse(line);
+                            if (data.type === 'metadata') {
+                                setReportData({
+                                    analysis: '',
+                                    charts: data.charts,
+                                    range: data.range,
+                                    createdAt: data.createdAt
+                                });
+                                setLoading(false);
+                            } else if (data.type === 'text') {
+                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                setReportData((prev: any) => ({
+                                    ...prev,
+                                    analysis: (prev?.analysis || '') + data.chunk
+                                }));
+                            } else if (data.type === 'error') {
+                                throw new Error(data.error);
+                            }
+                        } catch (parseError) {
+                            console.error("Failed to parse stream line", line, parseError);
+                        }
+                    }
+                }
+            }
+        }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        catch (err: any) {
             setError(err.message)
+            setLoading(false)
         } finally {
+            setIsStreaming(false)
             setLoading(false)
         }
     }
@@ -86,7 +137,7 @@ export default function AnalyticsPage() {
 
                     <button
                         onClick={handleGenerateReport}
-                        disabled={loading}
+                        disabled={loading || isStreaming}
                         className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-sm whitespace-nowrap"
                     >
                         {loading ? (
@@ -142,8 +193,10 @@ export default function AnalyticsPage() {
                                             outerRadius={100}
                                             paddingAngle={5}
                                             dataKey="value"
+                                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                             label={({ name, percent }) => `${name} ${(percent as any * 100).toFixed(0)}%`}
                                         >
+                                            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                                             {reportData.charts.status.map((entry: any, index: number) => (
                                                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                             ))}
@@ -168,6 +221,7 @@ export default function AnalyticsPage() {
                                             contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
                                         />
                                         <Bar dataKey="value" radius={[4, 4, 0, 0]}>
+                                            {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                                             {reportData.charts.priority.map((entry: any, index: number) => (
                                                 <Cell key={`cell-${index}`} fill={PRIORITY_COLORS[index % PRIORITY_COLORS.length]} />
                                             ))}
@@ -202,6 +256,7 @@ export default function AnalyticsPage() {
                             </h2>
                             <div className="flex items-center gap-3">
                                 <span className="text-xs bg-slate-800 px-2 py-1 rounded text-slate-300">Generated for {timeRange}</span>
+                                {isStreaming && <span className="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded animate-pulse border border-blue-500/30">Streaming...</span>}
                                 <button
                                     onClick={handleDownload}
                                     className="p-1.5 hover:bg-slate-700 rounded transition-colors"
@@ -223,7 +278,7 @@ export default function AnalyticsPage() {
                                 if (line.match(/^\d+\.\s/)) return <li key={i} className="ml-4 mb-1 font-medium text-slate-800">{line}</li>
                                 if (line.trim() === '') return <br key={i} />
 
-                                let formattedLine = line;
+                                const formattedLine = line;
                                 const boldRegex = /\*\*(.*?)\*\*/g;
                                 if (boldRegex.test(formattedLine)) {
                                     const parts = formattedLine.split(boldRegex);
@@ -247,7 +302,7 @@ export default function AnalyticsPage() {
                     </div>
                     <h3 className="text-lg font-semibold text-slate-900 mb-2">No Report Generated Yet</h3>
                     <p className="text-slate-500 max-w-md mx-auto mb-6">
-                        Select a time range and click the "Generate Report" button to have AI analyze your ticketing volume, prioritize trends, and provide insights.
+                        Select a time range and click the <span className="font-semibold">Generate Report</span> button to have AI analyze your ticketing volume, prioritize trends, and provide insights.
                     </p>
                 </div>
             )}

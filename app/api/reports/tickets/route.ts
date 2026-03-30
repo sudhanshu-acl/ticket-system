@@ -90,39 +90,67 @@ export async function GET(request: NextRequest) {
         \`\`\`
         `;
 
-        const response = await ai.models.generateContent({
-            model: 'gemini-2.5-flash',
-            contents: prompt,
-        });
+        return new Response(new ReadableStream({
+            async start(controller) {
+                try {
+                    const dateStr = new Date().toISOString().replace(/:/g, '-').split('.')[0];
+                    const filename = `analytics-${range}-${dateStr}.json`;
 
-        const reportText = response.text || "Failed to generate text analysis.";
+                    const metadata = {
+                        type: 'metadata',
+                        charts: {
+                            status: statusData,
+                            priority: priorityData,
+                            trend: trendData
+                        },
+                        range,
+                        createdAt: new Date().toISOString(),
+                        filename: filename
+                    };
 
-        const responseData = {
-            analysis: reportText,
-            charts: {
-                status: statusData,
-                priority: priorityData,
-                trend: trendData
-            },
-            range,
-            createdAt: new Date().toISOString()
-        };
+                    controller.enqueue(new TextEncoder().encode(JSON.stringify(metadata) + '\n'));
 
-        // Save to local file system
-        const analyticsDir = path.join(process.cwd(), 'app', 'data', 'analytics');
-        if (!fs.existsSync(analyticsDir)) {
-            fs.mkdirSync(analyticsDir, { recursive: true });
-        }
+                    const responseStream = await ai.models.generateContentStream({
+                        model: 'gemini-2.5-flash',
+                        contents: prompt,
+                    });
 
-        const dateStr = new Date().toISOString().replace(/:/g, '-').split('.')[0];
-        const filename = `analytics-${range}-${dateStr}.json`;
-        const filePath = path.join(analyticsDir, filename);
-        
-        fs.writeFileSync(filePath, JSON.stringify(responseData, null, 2), 'utf8');
+                    let fullText = '';
+                    for await (const chunk of responseStream) {
+                        if (chunk.text) {
+                            fullText += chunk.text;
+                            controller.enqueue(new TextEncoder().encode(JSON.stringify({ type: 'text', chunk: chunk.text }) + '\n'));
+                        }
+                    }
 
-        return NextResponse.json({
-            data: responseData,
-            filename: filename
+                    // Save to local file system
+                    const analyticsDir = path.join(process.cwd(), 'app', 'data', 'analytics');
+                    if (!fs.existsSync(analyticsDir)) {
+                        fs.mkdirSync(analyticsDir, { recursive: true });
+                    }
+
+                    const filePath = path.join(analyticsDir, filename);
+                    const responseData = {
+                        analysis: fullText,
+                        charts: metadata.charts,
+                        range: metadata.range,
+                        createdAt: metadata.createdAt
+                    };
+                    
+                    fs.writeFileSync(filePath, JSON.stringify(responseData, null, 2), 'utf8');
+                } catch (streamError) {
+                    console.error('Error during streaming:', streamError);
+                    controller.enqueue(new TextEncoder().encode(JSON.stringify({ type: 'error', error: 'Stream interrupted' }) + '\n'));
+                } finally {
+                    controller.close();
+                }
+            }
+        }), {
+            headers: {
+                'Content-Type': 'application/x-ndjson',
+                'Cache-Control': 'no-cache',
+                'Connection': 'keep-alive',
+            }
         });
 
     } catch (error: unknown) {

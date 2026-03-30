@@ -16,7 +16,7 @@ import {
     LineChart,
     Line,
 } from 'recharts'
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import MarkdownVisualizer from './MarkdownVisualizer'
 
 const COLORS = ['#3b82f6', '#8b5cf6', '#10b981', '#64748b'] // Open, In Progress, Resolved, Closed
@@ -50,6 +50,7 @@ export default function TicketAnalyticsModal({ isOpen, onClose }: TicketAnalytic
     const [reportData, setReportData] = useState<ReportData | null>(null)
     const [selectedFilename, setSelectedFilename] = useState<string | null>(null)
     const [loading, setLoading] = useState(false)
+    const [isStreaming, setIsStreaming] = useState(false)
     const [error, setError] = useState<string | null>(null)
     const [timeRange, setTimeRange] = useState('month')
 
@@ -98,22 +99,72 @@ export default function TicketAnalyticsModal({ isOpen, onClose }: TicketAnalytic
         fetchReport();
     }, [selectedFilename, isOpen]);
 
-    const generateMutation = useMutation({
-        mutationFn: async () => {
-            const res = await fetch(`/api/reports/tickets?range=${timeRange}`);
-            const data = await res.json();
-            if (!res.ok) throw new Error(data.error || 'Failed to generate report');
-            return data;
-        },
-        onSuccess: (data) => {
-            queryClient.invalidateQueries({ queryKey: ['savedAnalytics'] });
-            setReportData(data.data);
-            setSelectedFilename(data.filename);
-        }
-    });
-
     const handleGenerateReport = async () => {
-        generateMutation.mutate();
+        setIsStreaming(true);
+        setError(null);
+        setReportData(null);
+        setSelectedFilename(null);
+
+        try {
+            const res = await fetch(`/api/reports/tickets?range=${timeRange}`, { method: 'GET' });
+
+            if (!res.ok) {
+                const data = await res.json().catch(() => ({}));
+                throw new Error(data.error || 'Failed to generate report');
+            }
+
+            const reader = res.body?.getReader();
+            if (!reader) throw new Error('Response body is not streamable');
+            
+            const decoder = new TextDecoder();
+            let done = false;
+            let buffer = '';
+            let newFilename = '';
+            
+            while (!done) {
+                const { value, done: doneReading } = await reader.read();
+                done = doneReading;
+                
+                if (value) {
+                    buffer += decoder.decode(value, { stream: true });
+                    const lines = buffer.split('\n');
+                    buffer = lines.pop() || '';
+                    
+                    for (const line of lines) {
+                        if (!line.trim()) continue;
+                        try {
+                            const data = JSON.parse(line);
+                            if (data.type === 'metadata') {
+                                setReportData({
+                                    analysis: '',
+                                    charts: data.charts,
+                                    range: data.range,
+                                    createdAt: data.createdAt
+                                });
+                                newFilename = data.filename;
+                            } else if (data.type === 'text') {
+                                setReportData((prev: any) => ({
+                                    ...prev,
+                                    analysis: (prev?.analysis || '') + data.chunk
+                                }));
+                            } else if (data.type === 'error') {
+                                throw new Error(data.error);
+                            }
+                        } catch (parseError) {
+                            console.error("Failed to parse stream line", line, parseError);
+                        }
+                    }
+                }
+            }
+            if (newFilename) {
+                setSelectedFilename(newFilename);
+                queryClient.invalidateQueries({ queryKey: ['savedAnalytics'] });
+            }
+        } catch (err: any) {
+            setError(err.message);
+        } finally {
+            setIsStreaming(false);
+        }
     }
 
     const handleDownload = () => {
@@ -163,7 +214,7 @@ export default function TicketAnalyticsModal({ isOpen, onClose }: TicketAnalytic
                         <select
                             value={timeRange}
                             onChange={(e) => setTimeRange(e.target.value)}
-                            disabled={generateMutation.isPending}
+                            disabled={isStreaming}
                             className="w-full sm:w-auto px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 text-sm disabled:opacity-50"
                         >
                             <option value="week">Past Week</option>
@@ -174,10 +225,10 @@ export default function TicketAnalyticsModal({ isOpen, onClose }: TicketAnalytic
 
                         <button
                             onClick={handleGenerateReport}
-                            disabled={generateMutation.isPending}
+                            disabled={isStreaming}
                             className="w-full sm:w-auto px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-sm whitespace-nowrap"
                         >
-                            {generateMutation.isPending ? (
+                            {isStreaming ? (
                                 <>
                                     <div className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
                                     Aggregating...
@@ -190,10 +241,10 @@ export default function TicketAnalyticsModal({ isOpen, onClose }: TicketAnalytic
                         </button>
                     </div>
 
-                    {(error || generateMutation.error) && (
+                    {error && (
                         <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg text-sm">
                             <p className="font-semibold">Error</p>
-                            <p>{error || (generateMutation.error as Error).message}</p>
+                            <p>{error}</p>
                         </div>
                     )}
 
@@ -245,7 +296,7 @@ export default function TicketAnalyticsModal({ isOpen, onClose }: TicketAnalytic
 
                         {/* Main Report Area */}
                         <div className="lg:col-span-3 space-y-6">
-                            {(loading || generateMutation.isPending) && (
+                            {(loading || isStreaming) && !reportData && (
                                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden animate-pulse">
                                     <div className="p-6 space-y-6">
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -261,7 +312,7 @@ export default function TicketAnalyticsModal({ isOpen, onClose }: TicketAnalytic
                                 </div>
                             )}
 
-                            {reportData && !loading && !generateMutation.isPending && (
+                            {reportData && !loading && (
                                 <div className="space-y-6">
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         {/* Status Pie Chart */}
@@ -336,6 +387,7 @@ export default function TicketAnalyticsModal({ isOpen, onClose }: TicketAnalytic
                                             </h2>
                                             <div className="flex items-center gap-3">
                                                 <span className="text-xs bg-slate-800 px-2 py-1 rounded text-slate-300 hidden sm:inline capitalize">Range: {reportData.range}</span>
+                                                {isStreaming && <span className="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded animate-pulse border border-blue-500/30 hidden sm:inline">Streaming...</span>}
                                                 <button
                                                     onClick={handleDownload}
                                                     className="p-1.5 hover:bg-slate-700 rounded transition-colors"
@@ -352,7 +404,7 @@ export default function TicketAnalyticsModal({ isOpen, onClose }: TicketAnalytic
                                 </div>
                             )}
 
-                            {!reportData && !loading && !generateMutation.isPending && !error && (
+                            {!reportData && !loading && !isStreaming && !error && (
                                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 border-dashed p-12 text-center h-[500px] flex flex-col items-center justify-center">
                                     <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-4">
                                         📈

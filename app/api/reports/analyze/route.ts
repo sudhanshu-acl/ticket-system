@@ -52,33 +52,61 @@ export async function GET(request: NextRequest) {
         \`\`\`
         `;
 
-        // Call Gemini
-        const response = await ai.models.generateContent({
-            model: 'gemini-2.5-flash',
-            contents: prompt,
+        return new Response(new ReadableStream({
+            async start(controller) {
+                try {
+                    const dateStr = new Date().toISOString().replace(/:/g, '-').split('.')[0];
+                    const filename = `report-${dateStr}.md`;
+
+                    const metadata = {
+                        type: 'metadata',
+                        filename: filename,
+                        createdAt: new Date().toISOString()
+                    };
+
+                    controller.enqueue(new TextEncoder().encode(JSON.stringify(metadata) + '\n'));
+
+                    const responseStream = await ai.models.generateContentStream({
+                        model: 'gemini-2.5-flash',
+                        contents: prompt,
+                    });
+
+                    let fullText = '';
+                    for await (const chunk of responseStream) {
+                        console.log(" == CHUNK ... ", chunk);
+                        if (chunk.text) {
+                            fullText += chunk.text;
+                            controller.enqueue(new TextEncoder().encode(JSON.stringify({ type: 'text', chunk: chunk.text }) + '\n'));
+                        }
+                    }
+
+                    // Save to local file system
+                    const reportsDir = path.join(process.cwd(), 'app', 'data', 'reports');
+                    if (!fs.existsSync(reportsDir)) {
+                        fs.mkdirSync(reportsDir, { recursive: true });
+                    }
+
+                    const filePath = path.join(reportsDir, filename);
+                    fs.writeFileSync(filePath, fullText, 'utf8');
+
+                } catch (streamError) {
+                    console.error('Error during streaming:', streamError);
+                    controller.enqueue(new TextEncoder().encode(JSON.stringify({ type: 'error', error: 'Stream interrupted' }) + '\n'));
+                } finally {
+                    controller.close();
+                }
+            }
+        }), {
+            headers: {
+                'Content-Type': 'application/x-ndjson',
+                'Cache-Control': 'no-cache',
+                'Connection': 'keep-alive',
+            }
         });
 
-        const reportText = response.text || "Failed to generate report text.";
-
-        // Save to local file system
-        const reportsDir = path.join(process.cwd(), 'app', 'data', 'reports');
-        if (!fs.existsSync(reportsDir)) {
-            fs.mkdirSync(reportsDir, { recursive: true });
-        }
-
-        const dateStr = new Date().toISOString().replace(/:/g, '-').split('.')[0];
-        const filename = `report-${dateStr}.md`;
-        const filePath = path.join(reportsDir, filename);
-
-        fs.writeFileSync(filePath, reportText, 'utf8');
-
-        return NextResponse.json({
-            data: reportText,
-            filename: filename,
-            createdAt: new Date().toISOString()
-        });
-
-    } catch (error: any) {
+    }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    catch (error: any) {
         console.error('Error generating AI report:', error);
         return NextResponse.json({ error: error?.message || 'Failed to generate AI report.' }, { status: 500 });
     }

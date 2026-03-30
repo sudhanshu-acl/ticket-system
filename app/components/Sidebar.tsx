@@ -27,7 +27,7 @@ const Sidebar: React.FC<SidebarProps> = ({ user, onCollapsedChange }) => {
       { label: 'My Tickets', href: '/ticket', icon: '🎫' },
     ]
 
-    const roleItems: Record<UserRole, typeof baseItems> = {
+    const roleItems: Partial<Record<UserRole, typeof baseItems>> = {
       admin: [
         { label: 'Dashboard', href: '/dashboard', icon: '📊' },
         { label: 'Users', href: '/dashboard/users', icon: '👥' },

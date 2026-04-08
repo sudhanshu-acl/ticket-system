@@ -105,7 +105,7 @@ const Header = () => {
                                         <Image src="/logoipsum-418.png" alt="logo" width={144} height={40} />
                                     </Link>
                                 </li>
-                                {/* {navigationItems.map((item) => (
+                                {isMobileMenuOpen && navigationItems.map((item) => (
                                     <li key={item.href} className="lg:border-0 border-b border-gray-200 py-2 lg:py-0">
                                         <Link
                                             href={item.href}
@@ -115,7 +115,7 @@ const Header = () => {
                                             {item.label}
                                         </Link>
                                     </li>
-                                ))} */}
+                                ))}
                             </ul>
                         </div>
 

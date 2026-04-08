@@ -49,15 +49,13 @@ export default function DashboardLayout({
 
   // Default to collapsed view (no Sidebar) if user role is 'user', otherwise handle via state
   const isNormalUser = user?.role === 'user'
-  const mainMargin = isNormalUser ? '0' : (sidebarCollapsed ? '5rem' : '16rem')
-
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar for Admins & Support */}
       {!isNormalUser && <Sidebar user={user} onCollapsedChange={setSidebarCollapsed} />}
 
       {/* Main Content */}
-      <div className="flex-1 transition-all duration-300" style={{ marginLeft: mainMargin }}>
+      <div className={`flex-1 transition-all duration-300 ml-0 ${!isNormalUser ? (sidebarCollapsed ? 'lg:ml-20' : 'lg:ml-64') : ''}`}> 
         {/* Header */}
         <div className="bg-white border-b border-gray-200 px-8 py-4 sticky top-0 z-10">
           <div className="flex items-center justify-between">

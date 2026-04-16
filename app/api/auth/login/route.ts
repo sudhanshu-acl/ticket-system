@@ -51,6 +51,7 @@ export async function POST(request: Request) {
 
     logger.auth('LOGIN', email, true);
     return response;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     logger.error('[LOGIN] Login failed', { error: err.message });
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

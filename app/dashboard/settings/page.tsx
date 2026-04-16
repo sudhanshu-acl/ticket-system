@@ -3,9 +3,10 @@
 import React, { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getAIQuota, AIQuota } from '../../actions/ai/getQuota'
+import RoleManagement from './RoleManagement'
 
 const SettingsPage = () => {
-  const [activeTab, setActiveTab] = useState<'general' | 'ai-billing'>('general')
+  const [activeTab, setActiveTab] = useState<'general' | 'ai-billing' | 'roles'>('general')
 
   const { data: quotaData, isLoading: isLoadingQuota } = useQuery<AIQuota>({
     queryKey: ['aiQuota'],
@@ -41,6 +42,16 @@ const SettingsPage = () => {
               }`}
             >
               AI Quota & Billing
+            </button>
+            <button
+              onClick={() => setActiveTab('roles')}
+              className={`py-4 px-6 font-medium text-sm border-b-2 transition-colors ${
+                activeTab === 'roles'
+                  ? 'border-blue-500 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              Roles & Permissions
             </button>
           </nav>
         </div>
@@ -145,6 +156,10 @@ const SettingsPage = () => {
                 </div>
               </div>
             </div>
+          )}
+
+          {activeTab === 'roles' && (
+            <RoleManagement />
           )}
         </div>
       </div>

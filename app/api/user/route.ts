@@ -39,14 +39,14 @@ export async function PATCH(request: NextRequest) {
         await connectDB();
 
         const user = await User.findOneAndUpdate(
-            { email: targetEmail }, 
-            { name, role, jobTitle }, 
+            { email: targetEmail },
+            { name, role, jobTitle },
             { new: true }
         ).select('-_id -password');
 
         logger.api(pathname, method, 200, Date.now() - startTime);
         logger.info(`User profile updated successfully`, { targetEmail, updatedBy: userAuth.email }, pathname);
-        
+
         return NextResponse.json({ message: 'User updated successful', data: user });
     } catch (error: unknown) {
         logger.api(pathname, method, 500, Date.now() - startTime);
@@ -69,8 +69,10 @@ export async function GET(request: NextRequest) {
     try {
         const user = await verifyAuth(request);
 
-        // Require admin role for getting all users
-        if (!user || user.role !== 'admin') {
+        console.log('User', user);
+
+        // Require admin or manager role for getting all users
+        if (!user || !['admin', 'manager'].includes(user.role)) {
             logger.api(pathname, method, 401, Date.now() - startTime);
             logger.warn(`Unauthorized attempt to fetch all users`, { email: user?.email }, pathname);
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -82,7 +84,7 @@ export async function GET(request: NextRequest) {
 
         logger.api(pathname, method, 200, Date.now() - startTime);
         logger.info(`Successfully fetched users list`, { count: users.length, by: user.email }, pathname);
-        
+
         return NextResponse.json({ message: 'Users fetched successful', data: users });
     } catch (error: unknown) {
         logger.api(pathname, method, 500, Date.now() - startTime);
@@ -138,7 +140,7 @@ export async function POST(request: NextRequest) {
 
         logger.api(pathname, method, 201, Date.now() - startTime);
         logger.info(`User created successfully`, { newEmail: email, createdBy: userAuth.email }, pathname);
-        
+
         return NextResponse.json({ message: 'User created successful', data: userResponse }, { status: 201 });
     } catch (error: unknown) {
         logger.api(pathname, method, 500, Date.now() - startTime);

@@ -15,8 +15,8 @@ export async function PUT(
     }
     requirePermission(user.role, 'manager');
 
-    const { status, resolvedBy } = await request.json();
-    console.log("status ", status, resolvedBy);
+    const { status, resolvedBy, assignedTo } = await request.json();
+    console.log("status ", status, resolvedBy, assignedTo);
 
     // In newer Next.js (15+), `params` is a Promise, so we must await it before destructuring.
     const resolvedParams = await params;
@@ -32,7 +32,7 @@ export async function PUT(
 
         const updatedTicket = await Ticket.findByIdAndUpdate(
             ticketId,
-            { $set: { status, resolvedBy } },
+            { $set: { status, resolvedBy, assignedTo } },
             { new: true }
         );
 

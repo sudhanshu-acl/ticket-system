@@ -4,13 +4,13 @@ import { logger } from '@/app/lib/logger';
 import { verifyAuth } from '@/app/lib/auth';
 
 export async function GET(request: NextRequest) {
-    
+
   try {
 
     const user = await verifyAuth(request);
 
     if (!user) {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     logger.info('[Profile] fetch success', { profile: user._id });
@@ -20,6 +20,7 @@ export async function GET(request: NextRequest) {
     });
 
     return response;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     logger.error('[Profile] fetch failed', { error: err.message });
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

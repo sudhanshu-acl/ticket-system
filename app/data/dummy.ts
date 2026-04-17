@@ -34,4 +34,9 @@ export interface IncidentTicket {
   environment?: Environment;
   createdAt: string;
   attachments?: Attachment[];
+  assignedTo?: {
+    id: string;
+    name: string;
+    email: string;
+  };
 }

@@ -12,7 +12,7 @@ const TicketSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['Open', 'In Progress', 'Resolved', 'Closed'],  
+    enum: ['Open', 'In Progress', 'Resolved', 'Closed'],
     default: 'Open',
     required: true,
   },
@@ -21,7 +21,12 @@ const TicketSchema = new mongoose.Schema({
     email: { type: String, required: true },
     department: { type: String, required: true },
   },
-  createdAt: { type: Date, default: Date.now }, 
+  assignedTo: {
+    id: { type: String },
+    name: { type: String },
+    email: { type: String },
+  },
+  createdAt: { type: Date, default: Date.now },
 });
 
 export default mongoose.models.Ticket ||

@@ -3,9 +3,13 @@
 import React, { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getAIQuota, AIQuota } from '../../actions/ai/getQuota'
+import RoleManagement from './RoleManagement'
+import PermissionManagement from './PermissionManagement'
+import CategoryManagement from './CategoryManagement'
+import UserManagement from './UserManagement'
 
 const SettingsPage = () => {
-  const [activeTab, setActiveTab] = useState<'general' | 'ai-billing'>('general')
+  const [activeTab, setActiveTab] = useState<'general' | 'ai-billing' | 'users' | 'roles' | 'permissions' | 'categories'>('general')
 
   const { data: quotaData, isLoading: isLoadingQuota } = useQuery<AIQuota>({
     queryKey: ['aiQuota'],
@@ -41,6 +45,46 @@ const SettingsPage = () => {
               }`}
             >
               AI Quota & Billing
+            </button>
+            <button
+              onClick={() => setActiveTab('users')}
+              className={`py-4 px-6 font-medium text-sm border-b-2 transition-colors ${
+                activeTab === 'users'
+                  ? 'border-blue-500 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              Users
+            </button>
+            <button
+              onClick={() => setActiveTab('roles')}
+              className={`py-4 px-6 font-medium text-sm border-b-2 transition-colors ${
+                activeTab === 'roles'
+                  ? 'border-blue-500 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              Roles
+            </button>
+            <button
+              onClick={() => setActiveTab('permissions')}
+              className={`py-4 px-6 font-medium text-sm border-b-2 transition-colors ${
+                activeTab === 'permissions'
+                  ? 'border-blue-500 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              Permissions
+            </button>
+            <button
+              onClick={() => setActiveTab('categories')}
+              className={`py-4 px-6 font-medium text-sm border-b-2 transition-colors ${
+                activeTab === 'categories'
+                  ? 'border-blue-500 text-blue-600'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              Categories
             </button>
           </nav>
         </div>
@@ -145,6 +189,22 @@ const SettingsPage = () => {
                 </div>
               </div>
             </div>
+          )}
+
+          {activeTab === 'users' && (
+            <UserManagement />
+          )}
+
+          {activeTab === 'roles' && (
+            <RoleManagement />
+          )}
+
+          {activeTab === 'permissions' && (
+            <PermissionManagement />
+          )}
+
+          {activeTab === 'categories' && (
+            <CategoryManagement />
           )}
         </div>
       </div>

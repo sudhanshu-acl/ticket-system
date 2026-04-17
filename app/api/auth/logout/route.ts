@@ -17,6 +17,7 @@ export async function POST() {
         });
 
         return response;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
         logger.error('[LOGOUT] Logout failed', { error: err.message });
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

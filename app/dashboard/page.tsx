@@ -60,6 +60,8 @@ const DashboardPage = () => {
   const [isAnalyticsModalOpen, setAnalyticsModalOpen] = useState(false)
   const [newStatus, setNewStatus] = useState<Status>('Open')
   const [resolvedBy, setResolvedBy] = useState('')
+  const [assignableUsers, setAssignableUsers] = useState<User[]>([])
+  const [selectedAssignedTo, setSelectedAssignedTo] = useState<string>('')
 
   const [stats, setStats] = useState({
     totalTickets: 0,
@@ -85,6 +87,23 @@ const DashboardPage = () => {
   }, [])
 
   useEffect(() => {
+    if (user && (user.role === 'admin' || user.role === 'manager')) {
+      const fetchUsers = async () => {
+        try {
+          const res = await fetch('/api/user')
+          const data = await res.json()
+          if (data.data) {
+            setAssignableUsers(data.data)
+          }
+        } catch (e) {
+          console.error('Failed to fetch users', e)
+        }
+      }
+      fetchUsers()
+    }
+  }, [user])
+
+  useEffect(() => {
     const currentStats = {
       totalTickets: tickets.length,
       openTickets: tickets.filter((t) => t.status === 'Open').length,
@@ -95,10 +114,11 @@ const DashboardPage = () => {
   }, [tickets])
 
   const handleRowClick = (ticket: IncidentTicket) => {
-    if (user?.role === 'admin') {
+    if (user?.role === 'admin' || user?.role === 'manager') {
       setSelectedTicket(ticket)
       setNewStatus(ticket.status)
       setResolvedBy('') // could be prepopulated if it existed on the dummy ticket
+      setSelectedAssignedTo(ticket.assignedTo?.email || '')
       setIsSidebarOpen(true)
     }
   }
@@ -106,11 +126,19 @@ const DashboardPage = () => {
   const handleUpdateTicket = async () => {
     if (!selectedTicket) return
 
+    let assignedToObj = null
+    if (selectedAssignedTo) {
+        const u = assignableUsers.find(u => u.email === selectedAssignedTo)
+        if (u) {
+            assignedToObj = { id: u.email, name: u.name, email: u.email }
+        }
+    }
+
     try {
       const res = await fetch(`/api/ticket/${selectedTicket._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: newStatus, resolvedBy })
+        body: JSON.stringify({ status: newStatus, resolvedBy, assignedTo: assignedToObj })
       });
 
       const data = await res.json();
@@ -121,6 +149,7 @@ const DashboardPage = () => {
           return {
             ...t,
             status: newStatus,
+            assignedTo: assignedToObj || undefined
             // Add 'resolvedBy' if you add it to the Interface later
           }
         }
@@ -217,13 +246,14 @@ const DashboardPage = () => {
                 <th className="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase">Priority</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase">Status</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase">Reported By</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-slate-600 uppercase">Assigned To</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
               {tickets.map((ticket) => (
                 <tr
                   key={ticket._id}
-                  className={`hover:bg-gray-50 ${user?.role === 'admin' ? 'cursor-pointer' : ''}`}
+                  className={`hover:bg-gray-50 ${(user?.role === 'admin' || user?.role === 'manager') ? 'cursor-pointer' : ''}`}
                   onClick={() => handleRowClick(ticket)}
                 >
                   <td className="px-6 py-4 text-sm font-semibold text-blue-600">{ticket._id}</td>
@@ -240,6 +270,9 @@ const DashboardPage = () => {
                     </span>
                   </td>
                   <td className="px-6 py-4 text-sm text-slate-600">{ticket.reportedBy.name}</td>
+                  <td className="px-6 py-4 text-sm text-slate-600">
+                    {ticket.assignedTo?.name || <span className="text-gray-400 italic">Assignment Pending</span>}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -272,6 +305,20 @@ const DashboardPage = () => {
               </div>
 
               <div className="border-t border-gray-200 pt-6">
+                <label className="block text-sm font-medium text-slate-900 mb-2">
+                  Assigned To
+                </label>
+                <select
+                  value={selectedAssignedTo}
+                  onChange={(e) => setSelectedAssignedTo(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 mb-4"
+                >
+                  <option value="">Assignment Pending</option>
+                  {assignableUsers.map(u => (
+                    <option key={u.email} value={u.email}>{u.name || u.email}</option>
+                  ))}
+                </select>
+
                 <label className="block text-sm font-medium text-slate-900 mb-2">
                   Update Status
                 </label>

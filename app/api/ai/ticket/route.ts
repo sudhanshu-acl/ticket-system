@@ -5,12 +5,14 @@ import Ticket from '@/app/models/ticket';
 import { verifyAuth } from '@/app/lib/auth';
 import { GoogleGenAI } from '@google/genai';
 import { ticketGeneratePrompt } from '@/app/lib/prompt';
+import { logger } from '@/app/lib/logger';
 
 // Initialize the SDK. It will automatically use process.env.GEMINI_API_KEY
 export const ai = new GoogleGenAI({});
 
 export async function POST(request: NextRequest) {
     const user = await verifyAuth(request);
+    logger.info('[AI] Ticket generation request', { user });
     if (!user) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -37,6 +39,7 @@ export async function POST(request: NextRequest) {
             model: 'gemini-2.5-flash',
             contents: promptStr,
         });
+        logger.info('[AI] Ticket generated successfully', { response });
 
         let reportText = response.text || "{}";
 
@@ -52,6 +55,9 @@ export async function POST(request: NextRequest) {
         // Parse the JSON object from the AI
         const aiTicketData = JSON.parse(reportText);
 
+        logger.info('[AI] Ticket generated successfully', { aiTicketData });
+
+
         // Return generated ticket data for frontend to review
         return NextResponse.json({
             message: 'Ticket generated successful',
@@ -62,8 +68,9 @@ export async function POST(request: NextRequest) {
                 description: userQuery // keep original prompt as description if none exists
             }
         });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-        console.error("AI Ticket Generation Error:", error);
+        logger.error('[AI] Ticket generation failed', { error });
         return NextResponse.json({ error: error.message || 'Failed to generate ticket' }, { status: 500 });
     }
 }

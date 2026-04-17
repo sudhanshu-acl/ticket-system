@@ -1,47 +1,47 @@
-// app/dashboard/settings/CategoryManagement.tsx
+// app/dashboard/settings/PermissionManagement.tsx
 import React, { useState, useEffect } from 'react';
-import { Category } from '@/app/utils/type';
+import { Permission } from '@/app/utils/type';
 
-export default function CategoryManagement() {
-  const [categories, setCategories] = useState<Category[]>([]);
+export default function PermissionManagement() {
+  const [permissions, setPermissions] = useState<Permission[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingCat, setEditingCat] = useState<Category | null>(null);
+  const [editingPerm, setEditingPerm] = useState<Permission | null>(null);
   const [formData, setFormData] = useState({ name: '', code: '', description: '' });
 
   useEffect(() => {
-    fetchCategories();
+    fetchPermissions();
   }, []);
 
-  const fetchCategories = async () => {
+  const fetchPermissions = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/category');
+      const res = await fetch('/api/permission');
       const data = await res.json();
       if (res.ok) {
-        setCategories(data.data || []);
+        setPermissions(data.data || []);
       } else {
-        setError(data.error || 'Failed to fetch categories');
+        setError(data.error || 'Failed to fetch permissions');
       }
     } catch (err) {
-      setError('An error occurred while fetching categories');
+      setError('An error occurred while fetching permissions');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleOpenModal = (cat?: Category) => {
-    if (cat) {
-      setEditingCat(cat);
+  const handleOpenModal = (perm?: Permission) => {
+    if (perm) {
+      setEditingPerm(perm);
       setFormData({
-        name: cat.name,
-        code: cat.code,
-        description: cat.description,
+        name: perm.name,
+        code: perm.code,
+        description: perm.description,
       });
     } else {
-      setEditingCat(null);
+      setEditingPerm(null);
       setFormData({ name: '', code: '', description: '' });
     }
     setIsModalOpen(true);
@@ -49,7 +49,7 @@ export default function CategoryManagement() {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setEditingCat(null);
+    setEditingPerm(null);
   };
 
   const handleSave = async (e: React.FormEvent) => {
@@ -60,8 +60,8 @@ export default function CategoryManagement() {
     }
 
     try {
-      const url = editingCat ? `/api/category/${editingCat._id}` : '/api/category';
-      const method = editingCat ? 'PUT' : 'POST';
+      const url = editingPerm ? `/api/permission/${editingPerm._id}` : '/api/permission';
+      const method = editingPerm ? 'PUT' : 'POST';
       
       const payload = {
         ...formData,
@@ -77,44 +77,44 @@ export default function CategoryManagement() {
       const data = await res.json();
       if (res.ok) {
         handleCloseModal();
-        fetchCategories();
+        fetchPermissions();
       } else {
-        alert(data.error || 'Failed to save category');
+        alert(data.error || 'Failed to save permission');
       }
     } catch (err) {
-      alert('Failed to save category due to network error');
+      alert('Failed to save permission due to network error');
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this category?')) return;
+    if (!confirm('Are you sure you want to delete this permission?')) return;
     try {
-      const res = await fetch(`/api/category/${id}`, { method: 'DELETE' });
+      const res = await fetch(`/api/permission/${id}`, { method: 'DELETE' });
       if (res.ok) {
-        fetchCategories();
+        fetchPermissions();
       } else {
         const data = await res.json();
-        alert(data.error || 'Failed to delete category');
+        alert(data.error || 'Failed to delete permission');
       }
     } catch (err) {
-      alert('Failed to delete category');
+      alert('Failed to delete permission');
     }
   };
 
-  if (loading) return <div className="p-4 text-center text-gray-500">Loading categories...</div>;
+  if (loading) return <div className="p-4 text-center text-gray-500">Loading permissions...</div>;
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-lg font-semibold text-gray-900">Category Management</h2>
-          <p className="text-sm text-gray-500">Manage global ticket classification categories.</p>
+          <h2 className="text-lg font-semibold text-gray-900">Permission Management</h2>
+          <p className="text-sm text-gray-500">Define modular permissions available for assignment.</p>
         </div>
         <button
           onClick={() => handleOpenModal()}
           className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium text-sm transition-colors"
         >
-          + Add Category
+          + Add Permission
         </button>
       </div>
 
@@ -131,26 +131,26 @@ export default function CategoryManagement() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {categories.map(cat => (
-              <tr key={cat._id} className="hover:bg-gray-50 transition-colors">
-                <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{cat.name}</td>
-                <td className="px-6 py-4 whitespace-nowrap font-mono text-xs text-teal-600 bg-teal-50 px-2 py-1 rounded inline-block mt-3">{cat.code}</td>
-                <td className="px-6 py-4 text-gray-500">{cat.description}</td>
+            {permissions.map(perm => (
+              <tr key={perm._id} className="hover:bg-gray-50 transition-colors">
+                <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{perm.name}</td>
+                <td className="px-6 py-4 whitespace-nowrap font-mono text-xs text-indigo-600 bg-indigo-50 px-2 py-1 rounded inline-block mt-3">{perm.code}</td>
+                <td className="px-6 py-4 text-gray-500">{perm.description}</td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  {cat.isSystem ? (
+                  {perm.isSystem ? (
                     <span className="text-gray-400 italic flex items-center justify-end gap-1"><span aria-hidden="true">🔒</span> System</span>
                   ) : (
                     <>
-                      <button onClick={() => handleOpenModal(cat)} className="text-blue-600 hover:text-blue-900 mr-4">Edit</button>
-                      <button onClick={() => handleDelete(cat._id)} className="text-red-600 hover:text-red-900">Delete</button>
+                      <button onClick={() => handleOpenModal(perm)} className="text-blue-600 hover:text-blue-900 mr-4">Edit</button>
+                      <button onClick={() => handleDelete(perm._id)} className="text-red-600 hover:text-red-900">Delete</button>
                     </>
                   )}
                 </td>
               </tr>
             ))}
-            {categories.length === 0 && (
+            {permissions.length === 0 && (
               <tr>
-                <td colSpan={4} className="px-6 py-8 text-center text-gray-500">No categories found.</td>
+                <td colSpan={4} className="px-6 py-8 text-center text-gray-500">No permissions found.</td>
               </tr>
             )}
           </tbody>
@@ -161,20 +161,20 @@ export default function CategoryManagement() {
         <div className="fixed inset-0 bg-black/30 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
           <div className="bg-white rounded-xl shadow-2xl max-w-lg w-full overflow-hidden">
             <div className="px-6 py-4 border-b border-gray-200 flex justify-between items-center bg-gray-50">
-              <h3 className="text-lg font-bold text-gray-900">{editingCat ? 'Edit Category' : 'Create Category'}</h3>
+              <h3 className="text-lg font-bold text-gray-900">{editingPerm ? 'Edit Permission' : 'Create Permission'}</h3>
               <button onClick={handleCloseModal} className="text-gray-400 hover:text-gray-600">✕</button>
             </div>
             
             <form onSubmit={handleSave} className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Category Name</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Permission Name</label>
                 <input
                   type="text"
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="e.g. Software, Hardware"
+                  placeholder="e.g. Read Tickets"
                 />
               </div>
 
@@ -186,7 +186,7 @@ export default function CategoryManagement() {
                   value={formData.code}
                   onChange={(e) => setFormData({...formData, code: e.target.value.toUpperCase().replace(/\s+/g, '_')})}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 font-mono text-sm"
-                  placeholder="CAT_SOFTWARE"
+                  placeholder="TKT_READ"
                 />
               </div>
               
@@ -198,7 +198,7 @@ export default function CategoryManagement() {
                   value={formData.description}
                   onChange={(e) => setFormData({...formData, description: e.target.value})}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="Describe classification use-case"
+                  placeholder="Describe the permission's scope"
                 />
               </div>
 

@@ -29,6 +29,15 @@ export async function PUT(
 
         await connectDB();
 
+        // Prevent modification of system roles
+        const targetRoleToEdit = await Role.findById(roleId);
+        if (!targetRoleToEdit) {
+            return NextResponse.json({ error: 'Role not found' }, { status: 404 });
+        }
+        if (targetRoleToEdit.isSystem) {
+            return NextResponse.json({ error: 'Cannot modify system-protected records' }, { status: 403 });
+        }
+
         // Ensure name is unique if changed
         const existingRole = await Role.findOne({ name, _id: { $ne: roleId } });
         if (existingRole) {
@@ -71,6 +80,14 @@ export async function DELETE(
         const roleId = resolvedParams.id;
 
         await connectDB();
+
+        const targetRoleToDelete = await Role.findById(roleId);
+        if (!targetRoleToDelete) {
+            return NextResponse.json({ error: 'Role not found' }, { status: 404 });
+        }
+        if (targetRoleToDelete.isSystem) {
+            return NextResponse.json({ error: 'Cannot delete system-protected records' }, { status: 403 });
+        }
 
         const deletedRole = await Role.findByIdAndDelete(roleId);
 

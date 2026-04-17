@@ -2,7 +2,7 @@ export type pagePropsChildNode = {
     children: React.ReactNode;
 }
 
-export type UserRole = 'admin' | 'user' | 'support' | 'manager';
+export type UserRole = string;
 
 export interface BlogPost {
     userId?: number;
@@ -16,6 +16,7 @@ export interface User {
     name?: string;
     email: string;
     role?: UserRole;
+    rolePermissions?: string[];
     jobTitle?: string;
 }
 
@@ -40,8 +41,30 @@ export interface LoginResponse {
 export interface Role {
     _id: string;
     name: string;
+    code: string;
     description: string;
     permissions: string[];
+    isSystem?: boolean;
+    createdAt?: string;
+    updatedAt?: string;
+}
+
+export interface Permission {
+    _id: string;
+    name: string;
+    code: string;
+    description: string;
+    isSystem?: boolean;
+    createdAt?: string;
+    updatedAt?: string;
+}
+
+export interface Category {
+    _id: string;
+    name: string;
+    code: string;
+    description: string;
+    isSystem?: boolean;
     createdAt?: string;
     updatedAt?: string;
 }

@@ -41,12 +41,16 @@ const Sidebar: React.FC<SidebarProps> = ({ user, onCollapsedChange }) => {
         { label: 'Users', href: '/dashboard/users', icon: '👥' },
         { label: 'Reports', href: '/dashboard/reports', icon: '📋' },
         { label: 'Analytics', href: '/dashboard/analytics', icon: '📈' },
+        { label: 'AI Topology', href: '/dashboard/topology', icon: '🕸️' },
+        { label: 'Architecture', href: '/dashboard/architecture', icon: '🏗️' },
         { label: 'Settings', href: '/dashboard/settings', icon: '⚙️' },
       ],
       support: [
         { label: 'Dashboard', href: '/dashboard', icon: '📊' },
         { label: 'Reports', href: '/dashboard/reports', icon: '📋' },
         { label: 'Analytics', href: '/dashboard/analytics', icon: '📈' },
+        { label: 'AI Topology', href: '/dashboard/topology', icon: '🕸️' },
+        { label: 'Architecture', href: '/dashboard/architecture', icon: '🏗️' },
       ],
       user: baseItems,
     }

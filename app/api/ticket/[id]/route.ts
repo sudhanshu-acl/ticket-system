@@ -48,3 +48,35 @@ export async function PUT(
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }
+
+export async function GET(
+    request: NextRequest,
+    { params }: { params: Promise<{ id: string }> }
+) {
+    const user = await verifyAuth(request);
+    if (!user) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const resolvedParams = await params;
+    const ticketId = resolvedParams.id;
+
+    try {
+        await connectDB();
+        const ticket = await Ticket.findById(ticketId);
+
+        if (!ticket) {
+            return NextResponse.json({ error: 'Ticket not found' }, { status: 404 });
+        }
+
+        // Optional: Check if user is allowed to view this ticket
+        if (user.role === 'user' && ticket.reportedBy?.email !== user.email) {
+             return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+        }
+
+        return NextResponse.json({ message: 'Ticket fetched successfully', data: ticket });
+    } catch (error) {
+        console.error('Error fetching ticket:', error);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    }
+}

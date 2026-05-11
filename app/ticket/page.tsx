@@ -160,7 +160,6 @@ export default function TicketPage() {
       },
       body: JSON.stringify(formateData),
     });
-    console.log('RES ', response);
 
     if (response.ok) {
       setIsModalOpen(false);
